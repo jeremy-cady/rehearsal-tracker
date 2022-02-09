@@ -1,18 +1,27 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/', (req, res) => {
-    console.log('GET Productions');
+router.post ('/', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+        INSERT INTO "rehearsal"
+            (start_time, end_time, production_id)
+        VALUES
+            ($1, $2, $3);
+        `;
 
-    const queryText = `SELECT * FROM "productions"`
+    const queryParams = [
+        req.body.start_time,
+        req.body.end_time,
+        req.body.production_id
+    ]
 
-    pool.query(queryText)
-        .then((result) => {
-            res.send(result.rows);
-        })
-        .catch((error) => {
-            console.log('Error getting Productions', error);
+    pool.query(queryText, queryParams)
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('POST error', error);
             res.sendStatus(500);
         })
-})
+});

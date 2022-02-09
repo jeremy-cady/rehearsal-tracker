@@ -19,6 +19,8 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Productions from '../Productions/Productions';
+import ProductionDetails from '../ProductionDetails/ProductionDetails';
+import RehearsalDetails from '../RehearsalDetails/RehearsalDetails';
 
 import './App.css';
 
@@ -74,6 +76,22 @@ function App() {
             path="/productions"
           >
             <Productions />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // Shows the user a list of all current productions
+            exact
+            path="/production/details"
+          >
+            <ProductionDetails />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // Shows the user a list of all current productions
+            exact
+            path="/rehearsal/details"
+          >
+            <RehearsalDetails />
           </ProtectedRoute>
 
           <Route
