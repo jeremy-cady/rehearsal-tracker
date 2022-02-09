@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './Productions.css';
 
 function Productions() {
     const dispatch = useDispatch();
     const productions = useSelector(store => store.productions);
+    const history = useHistory();
     console.log('productions are:', productions);
 
     const fetchProductions = () => {
@@ -18,6 +19,15 @@ function Productions() {
     useEffect(() => {
         fetchProductions();
     }, []);
+
+    const onSelect = (production) => {
+        console.log('production is:', production.production_name);
+        dispatch({
+            type: 'SET_SELECTED_PRODUCTION',
+            payload: production
+        })
+        history.push(`/production/details`);
+    }
     
 
 
@@ -27,7 +37,8 @@ function Productions() {
             {productions.map(production => {
                 return (
                     <div key={production.id}>
-                        <Link to="/production/details">{production.production_name}</Link>
+                        <Link onClick={()=>onSelect(production)}>{production.production_name}</Link>
+                        {console.log('production id is:', production.id)}
                     </div>
                 )
             })}

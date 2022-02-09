@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductionDetails() {
     console.log('in ProductionDetails');
 
     const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
-
     console.log('start time is:', startTime);
+    const [endTime, setEndTime] = useState('');
     console.log('end time is:', endTime);
+
+    const selectedProduction = useSelector(store => store.setSelectedProduction);
+    console.log('selected production is:', selectedProduction);
 
     return (
         <>
@@ -36,6 +38,8 @@ function ProductionDetails() {
                 max="2022-03-25T23:59"  
                 onChange={event => setEndTime(event.target.value)}  
             />
+
+            <button>Submit</button>
         
         </>
     )
