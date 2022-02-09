@@ -13,7 +13,17 @@ function ProductionDetails() {
     const selectedProduction = useSelector(store => store.setSelectedProduction);
     console.log('selected production is:', selectedProduction);
 
+    const rehearsals = useSelector(store => store.rehearsals);
+    console.log('rehearsals are:', rehearsals);
+
+    const fetchRehearsals = () => {
+        dispatch({
+            type: 'FETCH_REHEARSALS'
+        })
+    }
+
     const handleSubmit = () => {
+        console.log('in handleSubmit');
         dispatch({
             type:'CREATE_REHEARSAL',
             payload: {
@@ -24,11 +34,24 @@ function ProductionDetails() {
         })
     }
 
+    useEffect(() => {
+        fetchRehearsals();
+    }, [])
+
+
+
     return (
         <>
-            <h1>Production Name</h1>
+            <h1>{selectedProduction.production_name}</h1>
 
             <h3><u>Rehearsals</u></h3>
+            {rehearsals.map(rehearsal => {
+                return(
+                    <div key={rehearsal.id}>
+                        <h5>{rehearsal.start_time} - {rehearsal.end_time}</h5>
+                    </div>
+                )
+            })}
 
             <label htmlFor="startTime">Start time:</label>
             <input
