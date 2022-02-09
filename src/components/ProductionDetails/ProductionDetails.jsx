@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function ProductionDetails() {
     console.log('in ProductionDetails');
+    const dispatch = useDispatch();
 
     const [startTime, setStartTime] = useState('');
     console.log('start time is:', startTime);
@@ -12,6 +12,17 @@ function ProductionDetails() {
 
     const selectedProduction = useSelector(store => store.setSelectedProduction);
     console.log('selected production is:', selectedProduction);
+
+    const handleSubmit = () => {
+        dispatch({
+            type:'CREATE_REHEARSAL',
+            payload: {
+                start_time: startTime,
+                end_time: endTime,
+                production_id: selectedProduction.id
+            }
+        })
+    }
 
     return (
         <>
@@ -39,7 +50,7 @@ function ProductionDetails() {
                 onChange={event => setEndTime(event.target.value)}  
             />
 
-            <button>Submit</button>
+            <button onClick={handleSubmit}>Submit</button>
         
         </>
     )
