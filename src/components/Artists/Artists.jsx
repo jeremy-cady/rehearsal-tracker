@@ -2,8 +2,10 @@ function Artists() {
 
 
     return (
-        <h3><u>All Artists</u></h3>
-        <table></table>
+        <>
+            <h3><u>All Artists</u></h3>
+            <table></table>
+        </>
     )
 }
 
