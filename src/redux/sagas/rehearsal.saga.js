@@ -3,6 +3,8 @@ import { put, takeEvery } from "redux-saga/effects";
 
 
 function* fetchRehearsals() {
+    console.log('made it to fetchRehearsals');
+    
     try {const response = yield axios.get('/api/rehearsal')
     yield put({
         type: 'SET_REHEARSALS',
