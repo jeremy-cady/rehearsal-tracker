@@ -13,10 +13,14 @@ function RehearsalDetails() {
     const artists = useSelector(store => store.artistReducer);
     console.log('artists are:', artists);
 
+    const selectedArtists = useSelector(store => store.setSelectedArtist);
+    console.log('selected artists are:', selectedArtists);
+
     const [act, setAct] = useState('');
     const [scene, setScene] = useState('');
     const [pages, setPages] = useState('');
     const [measures, setMeasures] = useState('');
+    const [selectedRehearsalArtist, setSelectedRehearsalArtist] = useState('');
 
     useEffect(() => {
         fetchArtists();
@@ -34,6 +38,14 @@ function RehearsalDetails() {
         dispatch({
             type: 'FETCH_ARTISTS'
         })
+    }
+
+    const onSelect = (artist) => {
+        console.log('artist is:', artist);
+        dispatch({
+            type: 'SET_SELECTED_ARTIST',
+            payload: artist
+        });
     }
 
 
@@ -75,6 +87,7 @@ function RehearsalDetails() {
                     )
                 })}
             </select>
+            <button onClick={onSelect}>Add</button>
 
             <table>
                 <thead>
@@ -84,11 +97,22 @@ function RehearsalDetails() {
                         <th>Phone</th>
                     </tr>
                 </thead>
+                {/* <tbody>
+                    {selectedArtists.map(selectedArtist => {
+                        return(
+                            <tr key={selectedArtist.id}>
+                                <td>{selectedArtist.first_name} {selectedArtist.last_name}</td>
+                                <td>{selectedArtist.email}</td>
+                                <td>{selectedArtist.phone_number}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody> */}
             </table>
 
-            <button onClick={onBack}>Back to Productions</button>
+            <button onClick={onBack}>⬅️Back</button>
             <button>Submit</button>
-            <button onClick={onNext}>Artists Page</button>
+            <button onClick={onNext}>Artists Page➡️</button>
         
         
         </>

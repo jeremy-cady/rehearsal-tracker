@@ -111,7 +111,7 @@ function Artists() {
             <button onClick={handleSubmit}>Submit</button>
 
             <div>
-                <button onClick={onBack}>Back</button>
+                <button onClick={onBack}>⬅️Back</button>
             </div>
         </>
     )
