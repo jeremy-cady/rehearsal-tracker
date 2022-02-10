@@ -5,15 +5,16 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
+    
     const queryText = `
-        SELECT * FROM "rehearsal"
-        WHERE "rehearsal"."production_id" = $1;`;
+        SELECT * FROM "rehearsal";`
 
-    const queryParams = [req.body.production_id]
 
-    pool.query(queryText, queryParams)
+    pool.query(queryText)
         .then(result => {
             res.send(result.rows);
+            console.log('results:', result.rows);
+            
         }).catch(error => {
             console.log('GET rehearsals failed', error);
             res.sendStatus(500);

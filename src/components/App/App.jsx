@@ -21,6 +21,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Productions from '../Productions/Productions';
 import ProductionDetails from '../ProductionDetails/ProductionDetails';
 import RehearsalDetails from '../RehearsalDetails/RehearsalDetails';
+import Artists from '../Artists/Artists';
 
 import './App.css';
 
@@ -92,6 +93,14 @@ function App() {
             path="/rehearsal/details"
           >
             <RehearsalDetails />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // Shows the user a list of all current productions
+            exact
+            path="/artists"
+          >
+            <Artists />
           </ProtectedRoute>
 
           <Route
