@@ -1,15 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import './RehearsalDetails.css';
 
 function RehearsalDetails() {
     console.log('in RehearsalDetails');
 
+    const history = useHistory();
+
     const [act, setAct] = useState('');
     const [scene, setScene] = useState('');
     const [pages, setPages] = useState('');
     const [measures, setMeasures] = useState('');
+
+    const onBack = () => {
+        window.history.back();
+    }
+
+    const onNext = () => {
+        history.push('/artists')
+    }
 
     return(
         <>
@@ -54,9 +65,9 @@ function RehearsalDetails() {
                 </thead>
             </table>
 
-            <button to="/production/details">Back to Productions</button>
+            <button onClick={onBack}>Back to Productions</button>
             <button>Submit</button>
-            <button>Artists Page</button>
+            <button onClick={onNext}>Artists Page</button>
         
         
         </>

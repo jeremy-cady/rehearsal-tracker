@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import moment from 'moment';
 
@@ -48,7 +48,6 @@ function ProductionDetails() {
             type: 'SET_SELECTED_REHEARSAL',
             payload: rehearsal
         })
-        history.push(`/rehearsal/details`)
     }
 
 
@@ -61,7 +60,11 @@ function ProductionDetails() {
             {rehearsals.map(rehearsal => {
                 return(
                     <div key={rehearsal.id}>
-                        <Link onClick={onSelect}><h5><u>{moment(rehearsal.start_time).format('MM-DD-YY')}</u></h5></Link>
+                        <Link to="/rehearsal/details" onClick={onSelect}>
+                            <h5>
+                                    {moment(rehearsal.start_time).format('MM-DD-YY')}
+                            </h5>
+                        </Link>
                         <h5>{moment(rehearsal.start_time).format('h:mm a')} - {moment(rehearsal.end_time).format('h:mm a')}</h5>
                     </div>
                 )
