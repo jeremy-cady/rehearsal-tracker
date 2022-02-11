@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
@@ -10,21 +9,23 @@ function RehearsalDetails() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const artists = useSelector(store => store.artistReducer);
-    console.log('artists are:', artists);
+    // const artists = useSelector(store => store.artistReducer);
+    // console.log('artists are:', artists);
 
-    const selectedArtists = useSelector(store => store.setSelectedArtist);
-    console.log('selected artists are:', selectedArtists);
+    // const selectedArtistList = useSelector(store => store.setSelectedArtist);
+    // console.log('selected artists are:', selectedArtists);
 
     const [act, setAct] = useState('');
     const [scene, setScene] = useState('');
     const [pages, setPages] = useState('');
     const [measures, setMeasures] = useState('');
-    const [selectedRehearsalArtist, setSelectedRehearsalArtist] = useState('');
+    // const [selectedArtist, setSelectedArtist] = useState('');
+    
 
-    useEffect(() => {
-        fetchArtists();
-    }, []);
+
+    // useEffect(() => {
+    //     fetchArtists();
+    // }, []);
 
     const onBack = () => {
         window.history.back();
@@ -34,18 +35,22 @@ function RehearsalDetails() {
         history.push('/artists')
     }
 
-    const fetchArtists = () => {
-        dispatch({
-            type: 'FETCH_ARTISTS'
-        })
-    }
+    // const fetchArtists = () => {
+    //     dispatch({
+    //         type: 'FETCH_ARTISTS'
+    //     })
+    // }
 
-    const onSelect = (artist) => {
-        console.log('artist is:', artist);
-        dispatch({
-            type: 'SET_SELECTED_ARTIST',
-            payload: artist
-        });
+    // const onSelect = () => {
+    //     console.log('artist is:', selectedArtist);
+    //     dispatch({
+    //         type: 'SET_SELECTED_ARTIST',
+    //         payload: selectedArtist
+    //     });
+    // }
+
+    const onSubmit = () => {
+
     }
 
 
@@ -77,8 +82,12 @@ function RehearsalDetails() {
                 onChange={event => setMeasures(event.target.value)}
             />
 
-            <h3><u>Add Artists To The Rehearsal</u></h3>
-            <select>
+            {/* <h3><u>Add Artists To The Rehearsal</u></h3>
+            <select 
+                onChange={event => setSelectedArtist(event.target.value)}
+                value={selectedArtist}
+            >
+                <option></option>
                 {artists.map(artist => {
                     return(
                         <option key={artist.id}>
@@ -87,9 +96,9 @@ function RehearsalDetails() {
                     )
                 })}
             </select>
-            <button onClick={onSelect}>Add</button>
+            <button onClick={onSelect}>Add</button> */}
 
-            <table>
+            {/* <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -97,7 +106,7 @@ function RehearsalDetails() {
                         <th>Phone</th>
                     </tr>
                 </thead>
-                {/* <tbody>
+                <tbody>
                     {selectedArtists.map(selectedArtist => {
                         return(
                             <tr key={selectedArtist.id}>
@@ -107,12 +116,14 @@ function RehearsalDetails() {
                             </tr>
                         )
                     })}
-                </tbody> */}
-            </table>
+                </tbody>
+            </table> */}
 
-            <button onClick={onBack}>⬅️Back</button>
-            <button>Submit</button>
-            <button onClick={onNext}>Artists Page➡️</button>
+           <div>
+                <button onClick={onBack}>⬅️Back</button>
+                <button>Submit</button>
+                <button onClick={onNext}>Artists Page➡️</button>
+           </div>
         
         
         </>

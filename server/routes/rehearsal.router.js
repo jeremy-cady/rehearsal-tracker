@@ -46,4 +46,36 @@ router.post ('/', rejectUnauthenticated, (req, res) => {
         })
 });
 
+
+
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    console.log('id is', req.params.id);
+    
+    const queryText = `
+        UPDATE "rehearsal"
+        SET 
+            "act" = $1, 
+            "scene" = $2,
+            "page_numbers" = $3,
+            "measures = $4
+        WHERE "id" = $5;
+        `;
+
+    const queryParams = [
+        req.body.act,
+        req.body.scene,
+        req.body.page_numbers,
+        req.body.measures
+    ]
+
+    pool.query(queryText, queryParams)
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('PUT error', error);
+            res.sendStatus(500);
+        })
+})
+
+
 module.exports = router;

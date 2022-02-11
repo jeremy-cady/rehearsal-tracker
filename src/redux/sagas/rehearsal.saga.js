@@ -26,9 +26,21 @@ function* createRehearsal(action) {
 }
 
 
+function* addRehearsalContent(action) {
+    console.log('made it to addRehearsalContent');
+
+    yield axios.put('/api/rehearsal', action.payload);
+    
+    yield put({
+        type: 'SET_ADDED_REHEARSAL_CONTENT'
+    })
+}
+
+
 function* rehearsalSaga() {
     yield takeEvery('FETCH_REHEARSALS', fetchRehearsals);
     yield takeEvery('CREATE_REHEARSAL', createRehearsal);
+    yield takeEvery('ADD_REHEARSAL_CONTENT', addRehearsalContent);
 }
 
 export default rehearsalSaga;
