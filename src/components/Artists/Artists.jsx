@@ -1,16 +1,29 @@
 import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Artists() {
     console.log('in Artists');
 
     const dispatch = useDispatch();
 
+    const artists = useSelector(store => store.artistReducer);
+    console.log('artists are:', artists);
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+
+    useEffect(() => {
+        fetchArtists();
+    }, [])
+
+    const fetchArtists = () => {
+        dispatch({
+            type: 'FETCH_ARTISTS'
+        });
+    }
 
     const onBack = () => {
         window.history.back();
@@ -27,6 +40,14 @@ function Artists() {
                 phone_number: phone
             }
         })
+        clearFields();
+    }
+
+    const clearFields = () => {
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPhone('');
     }
 
 
@@ -44,9 +65,16 @@ function Artists() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-
-                    </tr>
+                    {artists.map(artist => {
+                        return(
+                            <tr key={artist.id}>
+                                <td>{artist.first_name}</td>
+                                <td>{artist.last_name}</td>
+                                <td>{artist.email}</td>
+                                <td>{artist.phone_number}</td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
             </table>
 
@@ -55,31 +83,35 @@ function Artists() {
             <input
                 type="text"
                 placeholder="First Name"
+                value={firstName}
                 onChange={event => setFirstName(event.target.value)}
             />
 
             <input
                 type="text"
                 placeholder="Last Name"
+                value={lastName}
                 onChange={event => setLastName(event.target.value)}
             />
 
             <input
                 type="text"
                 placeholder="Email"
+                value={email}
                 onChange={event => setEmail(event.target.value)}
             />
 
             <input
                 type="text"
                 placeholder="Phone"
+                value={phone}
                 onChange={event => setPhone(event.target.value)}
             />
 
             <button onClick={handleSubmit}>Submit</button>
 
             <div>
-                <button onClick={onBack}>Back</button>
+                <button onClick={onBack}>⬅️Back</button>
             </div>
         </>
     )

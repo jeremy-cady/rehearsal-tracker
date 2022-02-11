@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import productionSaga from './production.saga';
 import rehearsalSaga from './rehearsal.saga';
+import artistSaga from './artists.saga';
 
 
 // rootSaga is the primary saga.
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     userSaga(),
     productionSaga(),
     rehearsalSaga(),
+    artistSaga(),
   ]);
 }
