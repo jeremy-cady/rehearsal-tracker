@@ -28,12 +28,11 @@ function* createRehearsal(action) {
 
 function* addRehearsalContent(action) {
     console.log('made it to addRehearsalContent');
+    console.log('payload is:', action.payload);
+    
 
     yield axios.put(`/api/rehearsal/${action.payload.id}`, action.payload);
     
-    yield put({
-        type: 'SET_ADDED_REHEARSAL_CONTENT'
-    })
 }
 
 

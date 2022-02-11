@@ -57,7 +57,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             "act" = $1, 
             "scene" = $2,
             "page_numbers" = $3,
-            "measures = $4
+            "measures" = $4
         WHERE "id" = $5;
         `;
 

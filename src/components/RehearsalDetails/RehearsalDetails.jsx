@@ -52,7 +52,9 @@ function RehearsalDetails() {
     //     });
     // }
 
-    const onSubmit = () => {
+    const onSubmit = (event) => {
+        event.preventDefault();
+
         dispatch({
             type: 'ADD_REHEARSAL_CONTENT',
             payload: {
@@ -63,6 +65,15 @@ function RehearsalDetails() {
                 id: rehearsal.id
             }
         })
+        clearFields();
+        history.push('/artists')
+    }
+
+    const clearFields = () => {
+        setAct('');
+        setScene('');
+        setPages('');
+        setMeasures('');
     }
 
 
@@ -70,29 +81,41 @@ function RehearsalDetails() {
     return(
         <>
             <h3><u>Add Rehearsal Content</u></h3>
-            <input
-                type="text"
-                placeholder="Act"
-                onChange={event => setAct(event.target.value)}
-            />
+            <form>
+                <input
+                    type="text"
+                    placeholder="Act"
+                    value={act}
+                    onChange={event => setAct(event.target.value)}
+                />
 
-            <input
-                type="text"
-                placeholder="Scene"
-                onChange={event => setScene(event.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="Scene"
+                    value={scene}
+                    onChange={event => setScene(event.target.value)}
+                />
 
-            <input
-                type="text"
-                placeholder="Pages"
-                onChange={event => setPages(event.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="Pages"
+                    value={pages}
+                    onChange={event => setPages(event.target.value)}
+                />
 
-            <input
-                type="text"
-                placeholder="Measures"
-                onChange={event => setMeasures(event.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="Measures"
+                    value={measures}
+                    onChange={event => setMeasures(event.target.value)}
+                />
+
+                    <div>
+                        <button onClick={onBack}>⬅️Back</button>
+                        <button onClick={onSubmit}>Submit</button>
+                        <button onClick={onNext}>Artists Page➡️</button>
+                    </div>
+            </form>
 
             {/* <h3><u>Add Artists To The Rehearsal</u></h3>
             <select 
@@ -131,11 +154,7 @@ function RehearsalDetails() {
                 </tbody>
             </table> */}
 
-           <div>
-                <button onClick={onBack}>⬅️Back</button>
-                <button onClick={onSubmit}>Submit</button>
-                <button onClick={onNext}>Artists Page➡️</button>
-           </div>
+           
         
         
         </>
