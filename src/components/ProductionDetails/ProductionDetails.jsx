@@ -60,7 +60,7 @@ function ProductionDetails() {
             {rehearsals.map(rehearsal => {
                 return(
                     <div key={rehearsal.id}>
-                        <Link to="/rehearsal/details" onClick={onSelect}>
+                        <Link to="/rehearsal/details" onClick={()=>onSelect(rehearsal)}>
                             <h5>
                                     {moment(rehearsal.start_time).format('MM-DD-YY')}
                             </h5>

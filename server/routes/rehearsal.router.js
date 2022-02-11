@@ -65,7 +65,8 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         req.body.act,
         req.body.scene,
         req.body.page_numbers,
-        req.body.measures
+        req.body.measures,
+        req.params.id
     ]
 
     pool.query(queryText, queryParams)

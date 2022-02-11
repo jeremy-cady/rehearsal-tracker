@@ -9,6 +9,9 @@ function RehearsalDetails() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const rehearsal = useSelector(store => store.setSelectedRehearsal);
+    console.log('rehearsal id is:', rehearsal.id);
+
     // const artists = useSelector(store => store.artistReducer);
     // console.log('artists are:', artists);
 
@@ -50,7 +53,16 @@ function RehearsalDetails() {
     // }
 
     const onSubmit = () => {
-
+        dispatch({
+            type: 'ADD_REHEARSAL_CONTENT',
+            payload: {
+                act: act,
+                scene: scene,
+                page_numbers: pages,
+                measures: measures,
+                id: rehearsal.id
+            }
+        })
     }
 
 
@@ -121,7 +133,7 @@ function RehearsalDetails() {
 
            <div>
                 <button onClick={onBack}>⬅️Back</button>
-                <button>Submit</button>
+                <button onClick={onSubmit}>Submit</button>
                 <button onClick={onNext}>Artists Page➡️</button>
            </div>
         
