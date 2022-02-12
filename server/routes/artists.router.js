@@ -20,6 +20,25 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 
+router.get('/selected', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+        SELECT * FROM "artists"
+        WHERE "isSelected" = true;
+        `;
+
+    pool.query (queryText)
+        .then(result => {
+            res.send(result.rows);
+            console.log('results are:', result.rows);
+            
+        }).catch(error => {
+            console.log('Error getting selected artists', error);
+            res.sendStatus(500);
+        })
+})
+
+
+
 
 router.post('/', rejectUnauthenticated, (req, res) => {
     const queryText = `

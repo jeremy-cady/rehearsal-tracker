@@ -9,14 +9,19 @@ function RehearsalDetails() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        fetchArtists();
+        fetchSelectedArtistsList();
+    }, []);
+
     const rehearsal = useSelector(store => store.setSelectedRehearsal);
     console.log('rehearsal id is:', rehearsal.id);
 
     const artists = useSelector(store => store.artistReducer);
     console.log('artists are:', artists);
 
-    // const selectedArtistList = useSelector(store => store.setSelectedArtist);
-    // console.log('selected artists are:', selectedArtistList);
+    const selectedArtistsList = useSelector(store => store.setSelectedArtistsList);
+    console.log('selected artists are:', selectedArtistsList);
 
     const [act, setAct] = useState('');
     const [scene, setScene] = useState('');
@@ -24,11 +29,6 @@ function RehearsalDetails() {
     const [measures, setMeasures] = useState('');
     const [selectedArtistId, setSelectedArtistId] = useState('');
     
-
-
-    useEffect(() => {
-        fetchArtists();
-    }, []);
 
     const onBack = () => {
         window.history.back();
@@ -44,7 +44,15 @@ function RehearsalDetails() {
         })
     }
 
-    const markArtistSelected = () => {
+
+    const fetchSelectedArtistsList = () => {
+        dispatch({
+            type: 'FETCH_SELECTED_ARTISTS_LIST'
+        })
+    }
+
+    const markArtistSelected = (event) => {
+        event.preventDefault();
         console.log('artist id is:', selectedArtistId);
         dispatch({
             type: 'MARK_ARTIST_SELECTED',
@@ -55,8 +63,6 @@ function RehearsalDetails() {
     }
 
     const onSubmit = (event) => {
-        event.preventDefault();
-
         dispatch({
             type: 'ADD_REHEARSAL_CONTENT',
             payload: {
@@ -90,9 +96,7 @@ function RehearsalDetails() {
                     {artists.map(artist => {
                         return(
                                 <option key={artist.id} value={artist.id}>
-                                    {artist.id}  /  {artist.first_name} {artist.last_name}  
-                                    {/* {artist.phone_number}  /   */}
-                                    {/* {artist.email} */}
+                                    {artist.first_name} {artist.last_name}
                                 </option>
                         )
                     })}
@@ -109,14 +113,38 @@ function RehearsalDetails() {
                     </tr>
                 </thead>
                 <tbody>
-                    {selectedArtists.map(selectedArtist => {
-                        return(
+                    {selectedArtistsList.map(selectedArtist => {
+                            return (
                             <tr key={selectedArtist.id}>
                                 <td>{selectedArtist.first_name} {selectedArtist.last_name}</td>
                                 <td>{selectedArtist.email}</td>
                                 <td>{selectedArtist.phone_number}</td>
                             </tr>
-                        )
+                            )
+                        }  
+                    )}
+                </tbody>
+            </table> */}
+
+            {/* <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {artists.map(artist => {
+                        if(artist.isSelected === true) {
+                            return (
+                            <tr key={artist.id}>
+                                <td>{artist.first_name} {artist.last_name}</td>
+                                <td>{artist.email}</td>
+                                <td>{artist.phone_number}</td>
+                            </tr>
+                            )
+                        }  
                     })}
                 </tbody>
             </table> */}
