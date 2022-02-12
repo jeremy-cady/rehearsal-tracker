@@ -27,9 +27,17 @@ function* createArtist(action) {
 }
 
 
+function* addArtistToRehearsal(action) {
+    console.log('made it to addArtistToRehearsal');
+    
+    yield axios.put(`/api/artists/${action.payload.id}`, action.payload);
+}
+
+
 function* artistSaga() {
     yield takeEvery('CREATE_ARTIST', createArtist);
     yield takeEvery('FETCH_ARTISTS', fetchArtists);
+    yield takeEvery('ADD_ARTIST_TO_REHEARSAL', addArtistToRehearsal)
 }
 
 export default artistSaga;

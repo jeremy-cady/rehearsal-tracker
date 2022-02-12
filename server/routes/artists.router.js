@@ -16,7 +16,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             console.log('GET artists failed', error);
             res.sendStatus(500);
         })
-})
+});
 
 
 
@@ -44,6 +44,31 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             res.sendStatus(500);
         })
 });
+
+
+
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    const queryText = `
+        SELECT
+            "first_name" AS firstName,
+            "last_name" AS lastName,
+            "phone_number" AS phone,
+            "email" AS email
+        FROM "artists"
+        JOIN "rehearsals_artists"
+	        ON "artists"."id" = "artists_id"
+        JOIN "rehearsal"
+	        ON "rehearsal"."id" = "rehearsal_id";
+        `;
+
+    pool.query(queryText)
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('PUT error', error);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = router;
 
