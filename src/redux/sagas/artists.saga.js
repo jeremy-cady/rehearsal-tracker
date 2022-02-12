@@ -27,7 +27,7 @@ function* createArtist(action) {
 }
 
 
-function* addArtistToRehearsal(action) {
+function* markArtistSelected(action) {
     console.log('made it to addArtistToRehearsal');
     
     yield axios.put(`/api/artists/${action.payload.id}`, action.payload);
@@ -37,7 +37,7 @@ function* addArtistToRehearsal(action) {
 function* artistSaga() {
     yield takeEvery('CREATE_ARTIST', createArtist);
     yield takeEvery('FETCH_ARTISTS', fetchArtists);
-    yield takeEvery('ADD_ARTIST_TO_REHEARSAL', addArtistToRehearsal)
+    yield takeEvery('MARK_ARTIST_SELECTED', markArtistSelected);
 }
 
 export default artistSaga;

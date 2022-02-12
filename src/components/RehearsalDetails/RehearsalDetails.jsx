@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './RehearsalDetails.css';
 
 function RehearsalDetails() {
@@ -15,14 +15,14 @@ function RehearsalDetails() {
     const artists = useSelector(store => store.artistReducer);
     console.log('artists are:', artists);
 
-    const selectedArtistList = useSelector(store => store.setSelectedArtist);
-    console.log('selected artists are:', selectedArtistList);
+    // const selectedArtistList = useSelector(store => store.setSelectedArtist);
+    // console.log('selected artists are:', selectedArtistList);
 
     const [act, setAct] = useState('');
     const [scene, setScene] = useState('');
     const [pages, setPages] = useState('');
     const [measures, setMeasures] = useState('');
-    const [selectedArtist, setSelectedArtist] = useState('');
+    const [selectedArtistId, setSelectedArtistId] = useState('');
     
 
 
@@ -44,13 +44,13 @@ function RehearsalDetails() {
         })
     }
 
-    const onSelect = () => {
-        console.log('artist is:', selectedArtist);
+    const markArtistSelected = () => {
+        console.log('artist id is:', selectedArtistId);
         dispatch({
-            type: 'SET_SELECTED_ARTIST',
+            type: 'MARK_ARTIST_SELECTED',
             payload: {
-                selectedArtist,
-
+                id: selectedArtistId,
+                isSelected: true
         }});
     }
 
@@ -84,20 +84,21 @@ function RehearsalDetails() {
         <>
     
             <h3><u>Add Artists To The Rehearsal</u></h3>
-            <select 
-                onChange={event => setSelectedArtist(event.target.value)}
-                value={selectedArtist}
-            >
-                <option></option>
-                {artists.map(artist => {
-                    return(
-                        <option key={artist.id}>
-                            {artist.first_name} {artist.last_name}  /  {artist.phone_number}  /  {artist.email}
-                        </option>
-                    )
-                })}
-            </select>
-            <button onClick={onSelect}>Add</button>
+            <form>
+                <select onChange={event => setSelectedArtistId(event.target.value)}>
+                    <option></option>
+                    {artists.map(artist => {
+                        return(
+                                <option key={artist.id} value={artist.id}>
+                                    {artist.id}  /  {artist.first_name} {artist.last_name}  
+                                    {/* {artist.phone_number}  /   */}
+                                    {/* {artist.email} */}
+                                </option>
+                        )
+                    })}
+                </select>
+                <button onClick={markArtistSelected}>Add</button>
+            </form>
 
             {/* <table>
                 <thead>
@@ -150,11 +151,11 @@ function RehearsalDetails() {
                     onChange={event => setMeasures(event.target.value)}
                 />
 
-                    <div>
-                        <button onClick={onBack}>⬅️Back</button>
-                        <button>Submit</button>
-                        <button onClick={onNext}>Artists Page➡️</button>
-                    </div>
+                <div>
+                    <button onClick={onBack}>⬅️Back</button>
+                    <button>Submit</button>
+                    <button onClick={onNext}>Artists Page➡️</button>
+                </div>
             </form>
 
            

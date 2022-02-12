@@ -49,19 +49,17 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `
-        SELECT
-            "first_name" AS firstName,
-            "last_name" AS lastName,
-            "phone_number" AS phone,
-            "email" AS email
-        FROM "artists"
-        JOIN "rehearsals_artists"
-	        ON "artists"."id" = "artists_id"
-        JOIN "rehearsal"
-	        ON "rehearsal"."id" = "rehearsal_id";
+        UPDATE "artists"
+        SET "isSelected" = $1
+        WHERE "id" = $2; 
         `;
 
-    pool.query(queryText)
+    const queryParams = [
+        req.body.isSelected,
+        req.params.id
+    ]
+
+    pool.query(queryText, queryParams)
         .then(result => {
             res.sendStatus(201);
         }).catch(error => {
