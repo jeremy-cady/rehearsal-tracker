@@ -50,7 +50,14 @@ function RehearsalMatrix() {
                                 <td>{rehearsal.scene}</td>
                                 <td>{rehearsal.page_numbers}</td>
                                 <td>{rehearsal.measures}</td>
-                                <td>full list of artists</td>
+                                <td>
+                                    <select>
+                                        <option></option>
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                        <option>option 3</option>
+                                    </select>
+                                </td>
                             </tr>
                         )
                     })}

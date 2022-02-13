@@ -13,8 +13,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText)
         .then(result => {
             res.send(result.rows);
-            console.log('results:', result.rows);
-            
         }).catch(error => {
             console.log('GET rehearsals failed', error);
             res.sendStatus(500);
@@ -57,8 +55,9 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             "act" = $1, 
             "scene" = $2,
             "page_numbers" = $3,
-            "measures" = $4
-        WHERE "id" = $5;
+            "measures" = $4,
+            "artists" = $5
+        WHERE "id" = $6;
         `;
 
     const queryParams = [
@@ -66,6 +65,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         req.body.scene,
         req.body.page_numbers,
         req.body.measures,
+        req.body.artists,
         req.params.id
     ]
 

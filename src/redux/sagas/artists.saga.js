@@ -19,10 +19,8 @@ function* fetchArtists() {
 function* fetchSelectedArtistsList() {
     console.log('made it to fetchSelectedArtists');
     try{const response = yield axios.get('/api/artists/selected')
-    console.log('response is:', response);
-    
         yield put({
-            type: 'SET_SELECTED_ARTIST_LIST',
+            type: 'SET_SELECTED_ARTISTS_LIST',
             payload: response.data
         })}
         catch (error) {

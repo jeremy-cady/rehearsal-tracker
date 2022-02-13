@@ -12,7 +12,7 @@ function RehearsalDetails() {
     useEffect(() => {
         fetchArtists();
         fetchSelectedArtistsList();
-    }, []);
+    }, [selectedArtistsList]);
 
     const rehearsal = useSelector(store => store.setSelectedRehearsal);
     console.log('rehearsal id is:', rehearsal.id);
@@ -21,7 +21,7 @@ function RehearsalDetails() {
     console.log('artists are:', artists);
 
     const selectedArtistsList = useSelector(store => store.setSelectedArtistsList);
-    console.log('selected artists are:', selectedArtistsList);
+   
 
     const [act, setAct] = useState('');
     const [scene, setScene] = useState('');
@@ -51,18 +51,19 @@ function RehearsalDetails() {
         })
     }
 
-    const markArtistSelected = (event) => {
-        event.preventDefault();
+    const markArtistSelected = (tacos) => {
         console.log('artist id is:', selectedArtistId);
         dispatch({
             type: 'MARK_ARTIST_SELECTED',
             payload: {
-                id: selectedArtistId,
+                id: tacos,
                 isSelected: true
         }});
+        //fetchSelectedArtistsList();
     }
 
     const onSubmit = (event) => {
+        event.preventDefault();
         dispatch({
             type: 'ADD_REHEARSAL_CONTENT',
             payload: {
@@ -70,11 +71,11 @@ function RehearsalDetails() {
                 scene: scene,
                 page_numbers: pages,
                 measures: measures,
-                id: rehearsal.id
+                artists: selectedArtistsList,
+                id: rehearsal.id,
             }
         })
         clearFields();
-        history.push('/artists')
     }
 
     const clearFields = () => {
@@ -91,7 +92,7 @@ function RehearsalDetails() {
     
             <h3><u>Add Artists To The Rehearsal</u></h3>
             <form>
-                <select onChange={event => setSelectedArtistId(event.target.value)}>
+                <select onChange={event => markArtistSelected(event.target.value)}>
                     <option></option>
                     {artists.map(artist => {
                         return(
@@ -101,10 +102,10 @@ function RehearsalDetails() {
                         )
                     })}
                 </select>
-                <button onClick={markArtistSelected}>Add</button>
+                <button onClick={fetchSelectedArtistsList}>Add</button>
             </form>
 
-            {/* <table>
+            <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -124,33 +125,10 @@ function RehearsalDetails() {
                         }  
                     )}
                 </tbody>
-            </table> */}
-
-            {/* <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {artists.map(artist => {
-                        if(artist.isSelected === true) {
-                            return (
-                            <tr key={artist.id}>
-                                <td>{artist.first_name} {artist.last_name}</td>
-                                <td>{artist.email}</td>
-                                <td>{artist.phone_number}</td>
-                            </tr>
-                            )
-                        }  
-                    })}
-                </tbody>
-            </table> */}
+            </table>
 
             <h3><u>Add Rehearsal Content</u></h3>
-            <form onSubmit={onSubmit}>
+            <form>
                 <input
                     type="text"
                     placeholder="Act"
@@ -181,7 +159,7 @@ function RehearsalDetails() {
 
                 <div>
                     <button onClick={onBack}>⬅️Back</button>
-                    <button>Submit</button>
+                    <button onClick={onSubmit}>Submit</button>
                     <button onClick={onNext}>Artists Page➡️</button>
                 </div>
             </form>
