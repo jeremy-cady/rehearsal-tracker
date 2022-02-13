@@ -29,8 +29,11 @@ function Artists() {
         window.history.back();
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
         console.log('in handleSubmit');
+
         dispatch({
             type: 'CREATE_ARTIST',
             payload: {
@@ -50,6 +53,8 @@ function Artists() {
         setPhone('');
     }
 
+
+    
 
     return (
         <>
@@ -78,37 +83,39 @@ function Artists() {
                 </tbody>
             </table>
 
-            <h3><u>Add Artists</u></h3>
+            <h3><u>Add A New Artists</u></h3>
 
-            <input
-                type="text"
-                placeholder="First Name"
-                value={firstName}
-                onChange={event => setFirstName(event.target.value)}
-            />
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={event => setFirstName(event.target.value)}
+                />
 
-            <input
-                type="text"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={event => setLastName(event.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={event => setLastName(event.target.value)}
+                />
 
-            <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={event => setEmail(event.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={event => setEmail(event.target.value)}
+                />
 
-            <input
-                type="text"
-                placeholder="Phone"
-                value={phone}
-                onChange={event => setPhone(event.target.value)}
-            />
+                <input
+                    type="text"
+                    placeholder="Phone"
+                    value={phone}
+                    onChange={event => setPhone(event.target.value)}
+                />
 
-            <button onClick={handleSubmit}>Submit</button>
+                <button>Submit</button>
+            </form>
 
             <div>
                 <button onClick={onBack}>⬅️Back</button>

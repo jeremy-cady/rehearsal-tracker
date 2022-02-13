@@ -22,6 +22,7 @@ import Productions from '../Productions/Productions';
 import ProductionDetails from '../ProductionDetails/ProductionDetails';
 import RehearsalDetails from '../RehearsalDetails/RehearsalDetails';
 import Artists from '../Artists/Artists';
+import RehearsalMatrix from '../RehearsalMatrix/RehearsalMatrix';
 
 import './App.css';
 
@@ -69,6 +70,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // Shows the user a list of all current rehearsals
+            exact
+            path="/rehearsalMatrix"
+          >
+            <RehearsalMatrix />
           </ProtectedRoute>
 
           <ProtectedRoute

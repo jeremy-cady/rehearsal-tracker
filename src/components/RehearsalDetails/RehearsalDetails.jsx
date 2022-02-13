@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './RehearsalDetails.css';
 
 function RehearsalDetails() {
@@ -9,26 +9,26 @@ function RehearsalDetails() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        fetchArtists();
+        fetchSelectedArtistsList();
+    }, [selectedArtistsList]);
+
     const rehearsal = useSelector(store => store.setSelectedRehearsal);
     console.log('rehearsal id is:', rehearsal.id);
 
-    // const artists = useSelector(store => store.artistReducer);
-    // console.log('artists are:', artists);
+    const artists = useSelector(store => store.artistReducer);
+    console.log('artists are:', artists);
 
-    // const selectedArtistList = useSelector(store => store.setSelectedArtist);
-    // console.log('selected artists are:', selectedArtists);
+    const selectedArtistsList = useSelector(store => store.setSelectedArtistsList);
+   
 
     const [act, setAct] = useState('');
     const [scene, setScene] = useState('');
     const [pages, setPages] = useState('');
     const [measures, setMeasures] = useState('');
-    // const [selectedArtist, setSelectedArtist] = useState('');
+    const [selectedArtistId, setSelectedArtistId] = useState('');
     
-
-
-    // useEffect(() => {
-    //     fetchArtists();
-    // }, []);
 
     const onBack = () => {
         window.history.back();
@@ -38,23 +38,32 @@ function RehearsalDetails() {
         history.push('/artists')
     }
 
-    // const fetchArtists = () => {
-    //     dispatch({
-    //         type: 'FETCH_ARTISTS'
-    //     })
-    // }
+    const fetchArtists = () => {
+        dispatch({
+            type: 'FETCH_ARTISTS'
+        })
+    }
 
-    // const onSelect = () => {
-    //     console.log('artist is:', selectedArtist);
-    //     dispatch({
-    //         type: 'SET_SELECTED_ARTIST',
-    //         payload: selectedArtist
-    //     });
-    // }
+
+    const fetchSelectedArtistsList = () => {
+        dispatch({
+            type: 'FETCH_SELECTED_ARTISTS_LIST'
+        })
+    }
+
+    const markArtistSelected = (tacos) => {
+        console.log('artist id is:', selectedArtistId);
+        dispatch({
+            type: 'MARK_ARTIST_SELECTED',
+            payload: {
+                id: tacos,
+                isSelected: true
+        }});
+        //fetchSelectedArtistsList();
+    }
 
     const onSubmit = (event) => {
         event.preventDefault();
-
         dispatch({
             type: 'ADD_REHEARSAL_CONTENT',
             payload: {
@@ -62,11 +71,11 @@ function RehearsalDetails() {
                 scene: scene,
                 page_numbers: pages,
                 measures: measures,
-                id: rehearsal.id
+                artists: selectedArtistsList,
+                id: rehearsal.id,
             }
         })
         clearFields();
-        history.push('/artists')
     }
 
     const clearFields = () => {
@@ -80,6 +89,44 @@ function RehearsalDetails() {
 
     return(
         <>
+    
+            <h3><u>Add Artists To The Rehearsal</u></h3>
+            <form>
+                <select onChange={event => markArtistSelected(event.target.value)}>
+                    <option></option>
+                    {artists.map(artist => {
+                        return(
+                                <option key={artist.id} value={artist.id}>
+                                    {artist.first_name} {artist.last_name}
+                                </option>
+                        )
+                    })}
+                </select>
+                <button onClick={fetchSelectedArtistsList}>Add</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {selectedArtistsList.map(selectedArtist => {
+                            return (
+                            <tr key={selectedArtist.id}>
+                                <td>{selectedArtist.first_name} {selectedArtist.last_name}</td>
+                                <td>{selectedArtist.email}</td>
+                                <td>{selectedArtist.phone_number}</td>
+                            </tr>
+                            )
+                        }  
+                    )}
+                </tbody>
+            </table>
+
             <h3><u>Add Rehearsal Content</u></h3>
             <form>
                 <input
@@ -110,49 +157,12 @@ function RehearsalDetails() {
                     onChange={event => setMeasures(event.target.value)}
                 />
 
-                    <div>
-                        <button onClick={onBack}>⬅️Back</button>
-                        <button onClick={onSubmit}>Submit</button>
-                        <button onClick={onNext}>Artists Page➡️</button>
-                    </div>
+                <div>
+                    <button onClick={onBack}>⬅️Back</button>
+                    <button onClick={onSubmit}>Submit</button>
+                    <button onClick={onNext}>Artists Page➡️</button>
+                </div>
             </form>
-
-            {/* <h3><u>Add Artists To The Rehearsal</u></h3>
-            <select 
-                onChange={event => setSelectedArtist(event.target.value)}
-                value={selectedArtist}
-            >
-                <option></option>
-                {artists.map(artist => {
-                    return(
-                        <option key={artist.id}>
-                            {artist.first_name} {artist.last_name}
-                        </option>
-                    )
-                })}
-            </select>
-            <button onClick={onSelect}>Add</button> */}
-
-            {/* <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {selectedArtists.map(selectedArtist => {
-                        return(
-                            <tr key={selectedArtist.id}>
-                                <td>{selectedArtist.first_name} {selectedArtist.last_name}</td>
-                                <td>{selectedArtist.email}</td>
-                                <td>{selectedArtist.phone_number}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table> */}
 
            
         
