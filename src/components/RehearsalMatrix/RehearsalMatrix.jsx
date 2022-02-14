@@ -50,14 +50,19 @@ function RehearsalMatrix() {
                                 <td>{rehearsal.scene}</td>
                                 <td>{rehearsal.page_numbers}</td>
                                 <td>{rehearsal.measures}</td>
-                                <td>
+                                <td>{rehearsal.artists}</td>
+                                {/* <td>
                                     <select>
                                         <option></option>
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                        <option>option 3</option>
+                                        {rehearsal.artists.map(artist => {
+                                            return(
+                                                <option key={artist.id}>
+                                                    {artist.first_name} {artist.last_name}
+                                                </option>
+                                            )
+                                        })}
                                     </select>
-                                </td>
+                                </td> */}
                             </tr>
                         )
                     })}
