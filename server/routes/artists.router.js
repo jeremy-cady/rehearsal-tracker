@@ -66,27 +66,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 
 
-router.put('/:id', rejectUnauthenticated, (req, res) => {
-    const queryText = `
-        UPDATE "artists"
-        SET "isSelected" = $1
-        WHERE "id" = $2; 
-        `;
-
-    const queryParams = [
-        req.body.isSelected,
-        req.params.id
-    ]
-
-    pool.query(queryText, queryParams)
-        .then(result => {
-            res.sendStatus(201);
-        }).catch(error => {
-            console.log('PUT error', error);
-            res.sendStatus(500);
-        })
-})
-
 module.exports = router;
 
 

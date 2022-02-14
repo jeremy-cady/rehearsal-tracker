@@ -11,8 +11,7 @@ function RehearsalDetails() {
 
     useEffect(() => {
         fetchArtists();
-        fetchSelectedArtistsList();
-    }, [selectedArtistsList]);
+    }, []);
 
     const rehearsal = useSelector(store => store.setSelectedRehearsal);
     console.log('rehearsal id is:', rehearsal.id);
@@ -20,8 +19,8 @@ function RehearsalDetails() {
     const artists = useSelector(store => store.artistReducer);
     console.log('artists are:', artists);
 
-    const selectedArtistsList = useSelector(store => store.setSelectedArtistsList);
-    console.log('selectedArtistList is:', selectedArtistsList);
+    // const selectedArtistsList = useSelector(store => store.setSelectedArtistsList);
+    // console.log('selectedArtistList is:', selectedArtistsList);
    
 
     const [act, setAct] = useState('');
@@ -52,13 +51,13 @@ function RehearsalDetails() {
         })
     }
 
-    const markArtistSelected = (tacos) => {
+    const markArtistSelected = () => {
         console.log('artist id is:', selectedArtistId);
         dispatch({
             type: 'MARK_ARTIST_SELECTED',
             payload: {
-                id: tacos,
-                isSelected: true
+                artists_id: Number(selectedArtistId),
+                rehearsal_id: rehearsal.id
         }});
     }
 
@@ -71,7 +70,6 @@ function RehearsalDetails() {
                 scene: scene,
                 page_numbers: pages,
                 measures: measures,
-                artists: selectedArtistsList,
                 id: rehearsal.id,
             }
         })
@@ -92,7 +90,7 @@ function RehearsalDetails() {
     
             <h3><u>Add Artists To The Rehearsal</u></h3>
             <form>
-                <select onChange={event => markArtistSelected(event.target.value)}>
+                <select onChange={event => setSelectedArtistId(event.target.value)}>
                     <option></option>
                     {artists.map(artist => {
                         return(
@@ -102,10 +100,10 @@ function RehearsalDetails() {
                         )
                     })}
                 </select>
-                <button onClick={fetchSelectedArtistsList}>Add</button>
+                <button onClick={markArtistSelected}>Add</button>
             </form>
 
-            <table>
+            {/* <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -125,7 +123,7 @@ function RehearsalDetails() {
                         }  
                     )}
                 </tbody>
-            </table>
+            </table> */}
 
             <h3><u>Add Rehearsal Content</u></h3>
             <form>

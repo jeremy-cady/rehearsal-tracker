@@ -42,9 +42,9 @@ function* createArtist(action) {
 
 
 function* markArtistSelected(action) {
-    console.log('made it to addArtistToRehearsal');
+    console.log('made it to markArtistSelected');
     
-    yield axios.put(`/api/artists/${action.payload.id}`, action.payload);
+    yield axios.post(`/api/rehearsalsArtists`, action.payload);
 }
 
 
