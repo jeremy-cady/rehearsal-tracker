@@ -20,6 +20,29 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+
+    const queryText = `
+        SELECT * FROM "rehearsal"
+        WHERE "production_id" = $1;
+        `;
+
+    const queryParams = [
+        req.params.id
+    ]
+
+    pool.query(queryText, queryParams)
+        .then(result => {
+            res.send(result.rows)
+            console.log('results are:', result.rows);
+            
+        }).catch(error => {
+            console.log('GET specific production rehearsals failed', error);
+            res.sendStatus(500);
+        });
+})
+
+
 
 router.post ('/', rejectUnauthenticated, (req, res) => {
     const queryText = `

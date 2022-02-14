@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 function ProductionDetails() {
     console.log('in ProductionDetails');
 
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const [startTime, setStartTime] = useState('');
     console.log('start time is:', startTime);
@@ -17,12 +16,14 @@ function ProductionDetails() {
     const selectedProduction = useSelector(store => store.setSelectedProduction);
     console.log('selected production is:', selectedProduction);
 
-    const rehearsals = useSelector(store => store.rehearsals);
-    console.log('rehearsals are:', rehearsals);
+    const productionRehearsals = useSelector(store => store.setProductionRehearsals);
+    console.log('rehearsals are:', productionRehearsals);
 
-    const fetchRehearsals = () => {
+
+    const fetchProductionRehearsals = () => {
         dispatch({
-            type: 'FETCH_REHEARSALS'
+            type: 'FETCH_PRODUCTION_REHEARSALS',
+            payload: selectedProduction.id
         })
     }
 
@@ -39,7 +40,7 @@ function ProductionDetails() {
     }
 
     useEffect(() => {
-        fetchRehearsals();
+        fetchProductionRehearsals();
     }, [])
 
 
@@ -57,7 +58,7 @@ function ProductionDetails() {
             <h1>{selectedProduction.production_name}</h1>
 
             <h3><u>Rehearsals</u></h3>
-            {rehearsals.map(rehearsal => {
+            {productionRehearsals.map(rehearsal => {
                 return(
                     <div key={rehearsal.id}>
                         <Link to="/rehearsal/details" onClick={()=>onSelect(rehearsal)}>
