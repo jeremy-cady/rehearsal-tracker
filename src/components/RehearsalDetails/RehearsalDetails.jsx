@@ -21,6 +21,7 @@ function RehearsalDetails() {
     console.log('artists are:', artists);
 
     const selectedArtistsList = useSelector(store => store.setSelectedArtistsList);
+    console.log('selectedArtistList is:', selectedArtistsList);
    
 
     const [act, setAct] = useState('');
@@ -59,7 +60,6 @@ function RehearsalDetails() {
                 id: tacos,
                 isSelected: true
         }});
-        //fetchSelectedArtistsList();
     }
 
     const onSubmit = (event) => {
