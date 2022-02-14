@@ -56,7 +56,7 @@ function RehearsalDetails() {
         dispatch({
             type: 'MARK_ARTIST_SELECTED',
             payload: {
-                artists_id: Number(selectedArtistId),
+                artist_id: Number(selectedArtistId),
                 rehearsal_id: rehearsal.id
         }});
     }

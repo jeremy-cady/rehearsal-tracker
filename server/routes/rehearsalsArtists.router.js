@@ -9,12 +9,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     
     const queryText = `
         INSERT INTO "rehearsals_artists"
-            ("rehearsal_id", "artists_id")
+            ("rehearsal_id", "artist_id")
         VALUES($1, $2)
         `;
 
     const queryParams = [
-        req.body.artists_id,
+        req.body.artist_id,
         req.body.rehearsal_id
     ]
 

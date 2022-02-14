@@ -37,6 +37,7 @@ function ProductionDetails() {
                 production_id: selectedProduction.id
             }
         })
+        fetchProductionRehearsals();
     }
 
     useEffect(() => {
