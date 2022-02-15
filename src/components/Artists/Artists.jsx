@@ -54,6 +54,15 @@ function Artists() {
     }
 
 
+    const deleteArtist = (artist) => {
+        console.log('artist.id is: ', artist.id);
+        dispatch({
+            type: 'DELETE_ARTIST',
+            payload: artist
+        })
+    }
+
+
     
 
     return (
@@ -67,6 +76,7 @@ function Artists() {
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,6 +87,7 @@ function Artists() {
                                 <td>{artist.last_name}</td>
                                 <td>{artist.email}</td>
                                 <td>{artist.phone_number}</td>
+                                <td><button onClick={() => deleteArtist(artist)}>❌</button></td>
                             </tr>
                         )
                     })}
