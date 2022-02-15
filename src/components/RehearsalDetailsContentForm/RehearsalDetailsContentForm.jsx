@@ -10,7 +10,7 @@ function RehearsalDetailsContentForm() {
 
     useEffect(() => {
         fetchArtistsForRehearsal();
-    }, [selectedArtists]);
+    }, []);
 
     const rehearsal = useSelector(store => store.setSelectedRehearsal);
     console.log('rehearsal id is:', rehearsal.id);

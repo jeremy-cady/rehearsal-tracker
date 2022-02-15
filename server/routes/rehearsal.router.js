@@ -72,6 +72,8 @@ router.post ('/', rejectUnauthenticated, (req, res) => {
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     console.log('id is', req.params.id);
+    console.log('req.body is:', req.body);
+    
     
     const queryText = `
         UPDATE "rehearsal"

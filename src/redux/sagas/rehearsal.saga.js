@@ -49,7 +49,7 @@ function* createRehearsal(action) {
 
 
 function* addRehearsalContent(action) {
-    console.log('made it to addRehearsalContent');
+    console.log('made it to addRehearsalContent', action.payload);
     console.log('action.payload is:', action.payload);
     
     yield axios.put(`/api/rehearsal/${action.payload.id}`, action.payload);
