@@ -8,6 +8,8 @@ import setSelectedRehearsal from './setSelectedRehearsal.reducer'
 import artistReducer from './artist.reducer';
 import setSelectedArtist from './setSelectedArtist.reducer';
 import setSelectedArtistsList from './setSelectedArtistsList.reducer';
+import setProductionRehearsals from './setProductionRehearsals.reducer';
+import setArtistsForRehearsal from './setArtistsForRehearsal.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
   artistReducer,
   setSelectedArtist,
   setSelectedArtistsList,
+  setProductionRehearsals,
+  setArtistsForRehearsal,
 });
 
 export default rootReducer;

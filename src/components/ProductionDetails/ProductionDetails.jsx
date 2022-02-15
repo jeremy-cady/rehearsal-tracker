@@ -17,12 +17,25 @@ function ProductionDetails() {
     const selectedProduction = useSelector(store => store.setSelectedProduction);
     console.log('selected production is:', selectedProduction);
 
+    const productionRehearsals = useSelector(store => store.setProductionRehearsals);
+    console.log('production rehearsals are:', productionRehearsals);
+
     const rehearsals = useSelector(store => store.rehearsals);
     console.log('rehearsals are:', rehearsals);
+
 
     const fetchRehearsals = () => {
         dispatch({
             type: 'FETCH_REHEARSALS'
+        });
+    }
+
+
+
+    const fetchProductionRehearsals = () => {
+        dispatch({
+            type: 'FETCH_PRODUCTION_REHEARSALS',
+            payload: selectedProduction.id
         })
     }
 
@@ -33,13 +46,15 @@ function ProductionDetails() {
             payload: {
                 start_time: startTime,
                 end_time: endTime,
-                production_id: selectedProduction.id
+                production_id: selectedProduction.id,
+                production_name: selectedProduction.production_name
             }
         })
     }
 
     useEffect(() => {
         fetchRehearsals();
+        fetchProductionRehearsals();
     }, [])
 
 
@@ -51,13 +66,18 @@ function ProductionDetails() {
     }
 
 
+    const onBack = () => {
+        window.history.back();
+    }
+
+
 
     return (
         <>
             <h1>{selectedProduction.production_name}</h1>
 
             <h3><u>Rehearsals</u></h3>
-            {rehearsals.map(rehearsal => {
+            {productionRehearsals.map(rehearsal => {
                 return(
                     <div key={rehearsal.id}>
                         <Link to="/rehearsal/details" onClick={()=>onSelect(rehearsal)}>
@@ -91,6 +111,8 @@ function ProductionDetails() {
             />
 
             <button onClick={handleSubmit}>Submit</button>
+
+            <div><button onClick={onBack}>Back</button></div>
         
         </>
     )
