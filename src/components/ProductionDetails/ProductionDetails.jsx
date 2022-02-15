@@ -34,7 +34,8 @@ function ProductionDetails() {
             payload: {
                 start_time: startTime,
                 end_time: endTime,
-                production_id: selectedProduction.id
+                production_id: selectedProduction.id,
+                production_name: selectedProduction.production_name
             }
         })
         fetchProductionRehearsals();

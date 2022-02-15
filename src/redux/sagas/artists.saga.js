@@ -42,9 +42,26 @@ function* createArtist(action) {
 
 
 function* markArtistSelected(action) {
-    console.log('made it to markArtistSelected');
+    console.log('made it to markArtistSelected', action.payload);
     
     yield axios.post(`/api/rehearsalsArtists`, action.payload);
+}
+
+
+function* fetchArtistsForRehearsal(action){
+    console.log('made it to fetchArtistsForRehearsal');
+    console.log('action.payload is:', action.payload);
+    
+
+    try{const response = yield axios.get(`/api/rehearsalsArtists/${action.payload}`)
+        yield put({
+            type: 'SET_ARTISTS_FOR_REHEARSAL',
+            payload: response.data
+        })}
+        catch (error) {
+            console.error('SET_ARTISTS_FOR_REHEARSAL failed');
+        }
+    
 }
 
 
@@ -52,7 +69,8 @@ function* artistSaga() {
     yield takeEvery('CREATE_ARTIST', createArtist);
     yield takeEvery('FETCH_ARTISTS', fetchArtists);
     yield takeEvery('MARK_ARTIST_SELECTED', markArtistSelected);
-    yield takeEvery('FETCH_SELECTED_ARTISTS_LIST', fetchSelectedArtistsList)
+    yield takeEvery('FETCH_SELECTED_ARTISTS_LIST', fetchSelectedArtistsList),
+    yield takeEvery('FETCH_ARTISTS_FOR_REHEARSAL', fetchArtistsForRehearsal)
 }
 
 export default artistSaga;

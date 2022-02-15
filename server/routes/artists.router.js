@@ -29,7 +29,6 @@ router.get('/selected', rejectUnauthenticated, (req, res) => {
     pool.query (queryText)
         .then(result => {
             res.send(result.rows);
-            console.log('results are:', result.rows);
             
         }).catch(error => {
             console.log('Error getting selected artists', error);

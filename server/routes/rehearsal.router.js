@@ -47,15 +47,16 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.post ('/', rejectUnauthenticated, (req, res) => {
     const queryText = `
         INSERT INTO "rehearsal"
-            ("start_time", "end_time", "production_id")
+            ("start_time", "end_time", "production_id", "production_name")
         VALUES
-            ($1, $2, $3);
+            ($1, $2, $3, $4);
         `;
 
     const queryParams = [
         req.body.start_time,
         req.body.end_time,
-        req.body.production_id
+        req.body.production_id, 
+        req.body.production_name
     ]
 
     pool.query(queryText, queryParams)
