@@ -42,7 +42,6 @@ function RehearsalDetailsArtistForm() {
                 artist_id: Number(selectedArtistId),
                 rehearsal_id: rehearsal.id
         }});
-        fetchArtistsForRehearsal();
     }
 
     return(

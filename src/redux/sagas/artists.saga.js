@@ -45,6 +45,11 @@ function* markArtistSelected(action) {
     console.log('made it to markArtistSelected', action.payload);
     
     yield axios.post(`/api/rehearsalsArtists`, action.payload);
+
+    yield put({
+        type: 'FETCH_ARTISTS_FOR_REHEARSAL',
+        payload: action.payload.rehearsal_id
+    })
 }
 
 

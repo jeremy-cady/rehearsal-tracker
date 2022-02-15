@@ -103,4 +103,27 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 })
 
 
+
+router.delete('/:id', (req, res) => {
+    console.log('id is:', req.params.id);
+    
+    const queryText = `
+        DELETE FROM "rehearsal"
+        WHERE "id" = $1;
+        `;
+
+    const queryParams = [
+        req.params.id
+    ]
+
+    pool.query(queryText, queryParams)
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('DELETE error', error);
+            res.sendStatus(500);
+        })
+})
+
+
 module.exports = router;

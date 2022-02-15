@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 
 function RehearsalMatrix() {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         fetchRehearsals();
@@ -18,11 +20,25 @@ function RehearsalMatrix() {
         });
     }
 
+    const onNext = () => {
+        history.push('/productions')
+    }
+
+    const deleteRehearsal = (rehearsal) => {
+        console.log('delete', rehearsal);
+        dispatch({
+            type: 'DELETE_REHEARSAL',
+            payload: rehearsal
+        })
+    }
+
 
 
     return (
         <>
             <h1>Rehearsal Matrix</h1>
+
+            <button onClick={onNext}>Create A New Rehearsal</button>
 
             <table>
                 <thead>
@@ -36,13 +52,14 @@ function RehearsalMatrix() {
                         <th>Pages</th>
                         <th>Measures</th>
                         <th>Artists</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {rehearsals.map(rehearsal => {
                         return(
                             <tr key={rehearsal.id}>
-                                <td>production name</td>
+                                <td>{rehearsal.production_name}</td>
                                 <td>{moment(rehearsal.start_time).format('MM-DD-YYYY')}</td>
                                 <td>{moment(rehearsal.start_time).format('h:mm a')}</td>
                                 <td>{moment(rehearsal.end_time).format('h:mm a')}</td>
@@ -63,6 +80,7 @@ function RehearsalMatrix() {
                                         })}
                                     </select>
                                 </td> */}
+                                <td><button onClick={() => deleteRehearsal(rehearsal)}>❌</button></td>
                             </tr>
                         )
                     })}

@@ -53,6 +53,7 @@ function RehearsalDetailsContentForm() {
                 scene: scene,
                 page_numbers: pages,
                 measures: measures,
+                artists: selectedArtists,
                 id: rehearsal.id,
             }
         })

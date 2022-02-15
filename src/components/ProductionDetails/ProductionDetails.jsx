@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import moment from 'moment';
 
 function ProductionDetails() {
     console.log('in ProductionDetails');
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [startTime, setStartTime] = useState('');
     console.log('start time is:', startTime);
@@ -17,7 +18,18 @@ function ProductionDetails() {
     console.log('selected production is:', selectedProduction);
 
     const productionRehearsals = useSelector(store => store.setProductionRehearsals);
-    console.log('rehearsals are:', productionRehearsals);
+    console.log('production rehearsals are:', productionRehearsals);
+
+    const rehearsals = useSelector(store => store.rehearsals);
+    console.log('rehearsals are:', rehearsals);
+
+
+    const fetchRehearsals = () => {
+        dispatch({
+            type: 'FETCH_REHEARSALS'
+        });
+    }
+
 
 
     const fetchProductionRehearsals = () => {
@@ -38,10 +50,10 @@ function ProductionDetails() {
                 production_name: selectedProduction.production_name
             }
         })
-        fetchProductionRehearsals();
     }
 
     useEffect(() => {
+        fetchRehearsals();
         fetchProductionRehearsals();
     }, [])
 
@@ -51,6 +63,11 @@ function ProductionDetails() {
             type: 'SET_SELECTED_REHEARSAL',
             payload: rehearsal
         })
+    }
+
+
+    const onBack = () => {
+        window.history.back();
     }
 
 
@@ -94,6 +111,8 @@ function ProductionDetails() {
             />
 
             <button onClick={handleSubmit}>Submit</button>
+
+            <div><button onClick={onBack}>Back</button></div>
         
         </>
     )

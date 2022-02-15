@@ -35,11 +35,15 @@ function* fetchProductionRehearsals(action) {
 
 function* createRehearsal(action) {
     console.log('made it to createRehearsal');
+
+    console.log('action.payload.production_id is:', action.payload.production_id);
+    
     
     yield axios.post('/api/rehearsal', action.payload);
 
     yield put ({
-        type: 'FETCH_REHEARSALS'
+        type: 'FETCH_PRODUCTION_REHEARSALS',
+        payload: action.payload.production_id
     });
 }
 
@@ -49,7 +53,22 @@ function* addRehearsalContent(action) {
     console.log('action.payload is:', action.payload);
     
     yield axios.put(`/api/rehearsal/${action.payload.id}`, action.payload);
+
+    yield put({
+        type: 'FETCH_REHEARSALS'
+    })
     
+}
+
+
+function* deleteRehearsal(action) {
+    console.log('made it to deleteRehearsal', action.payload.id);
+    
+    yield axios.delete(`/api/rehearsal/${action.payload.id}`);
+
+    yield put({
+        type: 'FETCH_REHEARSALS'
+    })
 }
 
 
@@ -57,7 +76,8 @@ function* rehearsalSaga() {
     yield takeEvery('FETCH_REHEARSALS', fetchRehearsals);
     yield takeEvery('CREATE_REHEARSAL', createRehearsal);
     yield takeEvery('ADD_REHEARSAL_CONTENT', addRehearsalContent);
-    yield takeEvery('FETCH_PRODUCTION_REHEARSALS', fetchProductionRehearsals)
+    yield takeEvery('FETCH_PRODUCTION_REHEARSALS', fetchProductionRehearsals);
+    yield takeEvery('DELETE_REHEARSAL', deleteRehearsal);
 }
 
 export default rehearsalSaga;
