@@ -141,7 +141,7 @@ function ProductionDetails() {
 
             <h3 className="rehearsalTitle">Rehearsals</h3>
 
-            <Box className="rehearsalList" sx={{ width: "1200px"}}>
+            <Box className="rehearsalList" sx={{ width: "1300px" }}>
                 {productionRehearsals.map(rehearsal => {
                     return(
                         <div key={rehearsal.id} className="rehearsalTimes">

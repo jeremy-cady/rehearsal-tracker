@@ -6,6 +6,16 @@ import RehearsalDetailsArtistTable from "../RehearsalDetailsArtistTable/Rehearsa
 import RehearsalDetailsContentForm from "../RehearsalDetailsContentForm/RehearsalDetailsContentForm";
 import './RehearsalDetails.css';
 
+import { 
+    Table, 
+    TableHead, 
+    TableRow, 
+    TableBody,
+    Button, 
+    Box } 
+from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 function RehearsalDetails() {
     console.log('in RehearsalDetails');
 
@@ -26,15 +36,22 @@ function RehearsalDetails() {
 
     return(
         <>
-            <h1>{selectedProduction.production_name}</h1>
-            <h3><u>Add Artists To The Rehearsal</u></h3>
-            <RehearsalDetailsArtistForm />
+            <h1 className="productionTitle">{selectedProduction.production_name}</h1>
+            
+            <Box className="artistFormBox">
+                <h3 className="addArtistTitle">Add Artists To The Rehearsal</h3>
+                <RehearsalDetailsArtistForm />
+            </Box>
 
-            <h3><u>Added Artists</u></h3>
-            <RehearsalDetailsArtistTable />
+            <Box className="artistTableBox">
+                <h3 className="addedArtistsTitle">Added Artists</h3>
+                <RehearsalDetailsArtistTable />
+            </Box>
 
-            <h3><u>Add Rehearsal Content</u></h3>
-            <RehearsalDetailsContentForm />
+            <Box className="rehearsalContentBox">
+                <h3 className="addContentTitle">Add Rehearsal Content</h3>
+                <RehearsalDetailsContentForm />
+            </Box>
 
            
         

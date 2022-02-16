@@ -1,0 +1,13 @@
+.selectedArtistTable {
+    font-family: 'Josefin Slab';
+}
+
+.headerRow {
+    background-color: #B0C4DE;
+}
+
+.addArtistForm {
+    display: flex;
+    flex-direction: row;
+
+}

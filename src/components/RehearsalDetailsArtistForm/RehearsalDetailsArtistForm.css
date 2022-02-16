@@ -1,0 +1,9 @@
+.artistSelect {
+    font-family: 'Josefin Slab';
+}
+
+.addArtistFormGroup {
+    display: flex;
+    flex-direction: row;
+    
+}

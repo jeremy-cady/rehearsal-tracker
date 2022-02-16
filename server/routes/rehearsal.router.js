@@ -47,16 +47,15 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.post ('/', rejectUnauthenticated, (req, res) => {
     const queryText = `
         INSERT INTO "rehearsal"
-            ("start_time", "end_time", "production_id", "production_name")
+            ("start_time", "end_time", "production_id")
         VALUES
-            ($1, $2, $3, $4);
+            ($1, $2, $3);
         `;
 
     const queryParams = [
         req.body.start_time,
         req.body.end_time,
         req.body.production_id, 
-        req.body.production_name
     ]
 
     pool.query(queryText, queryParams)
@@ -81,9 +80,8 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             "act" = $1, 
             "scene" = $2,
             "page_numbers" = $3,
-            "measures" = $4,
-            "artists" = $5
-        WHERE "id" = $6;
+            "measures" = $4
+        WHERE "id" = $5;
         `;
 
     const queryParams = [
@@ -91,7 +89,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         req.body.scene,
         req.body.page_numbers,
         req.body.measures,
-        req.body.artists,
         req.params.id
     ]
 

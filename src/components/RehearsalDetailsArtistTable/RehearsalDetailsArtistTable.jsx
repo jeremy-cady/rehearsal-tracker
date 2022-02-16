@@ -1,6 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import './RehearsalDetailsArtistTable.css';
+
+import { 
+    Table, 
+    TableHead, 
+    TableRow, 
+    TableBody,
+    TableCell,
+    Button, 
+    Box } 
+from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 function RehearsalDetailsArtistTable() {
 
@@ -25,27 +38,80 @@ function RehearsalDetailsArtistTable() {
     }
 
     return(
-        <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <Table 
+            className="selectedArtistTable"
+            sx={{
+                width: '900px',
+            }}
+        >
+                <TableHead>
+                    <TableRow className="headerRow">
+                        <TableCell 
+                            className="tableCell" 
+                            sx={{
+                                fontFamily: 'Josefin Slab',
+                                textAlign: 'center',
+                            }}
+                        >
+                            Name
+                        </TableCell>
+                        <TableCell 
+                            className="tableCell" 
+                            sx={{
+                                fontFamily: 'Josefin Slab',
+                                textAlign: 'center',
+                            }}
+                        >
+                            Email
+                        </TableCell>
+                        <TableCell 
+                            className="tableCell" 
+                            sx={{
+                                fontFamily: 'Josefin Slab',
+                                textAlign: 'center',
+                            }}
+                        >
+                            Phone
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {selectedArtists.map(selectedArtist => {
                             return (
-                            <tr key={selectedArtist.id}>
-                                <td>{selectedArtist.first_name} {selectedArtist.last_name}</td>
-                                <td>{selectedArtist.email}</td>
-                                <td>{selectedArtist.phone_number}</td>
-                            </tr>
+                            <TableRow key={selectedArtist.id}>
+                                <TableCell
+                                    className="tableCell" 
+                                    sx={{
+                                        fontFamily: 'Josefin Slab',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    {selectedArtist.first_name} {selectedArtist.last_name}
+                                </TableCell>
+                                <TableCell
+                                    className="tableCell" 
+                                    sx={{
+                                        fontFamily: 'Josefin Slab',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    {selectedArtist.email}
+                                </TableCell>
+                                <TableCell
+                                    className="tableCell" 
+                                    sx={{
+                                        fontFamily: 'Josefin Slab',
+                                        textAlign: 'center',
+                                    }}
+                                >
+                                    {selectedArtist.phone_number}
+                                </TableCell>
+                            </TableRow>
                             )
                         }  
                     )}
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
 
     )
 }
