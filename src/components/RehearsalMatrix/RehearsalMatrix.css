@@ -1,0 +1,20 @@
+.pageTitle {
+    text-align: center;
+    color: #191970;
+    font-family: 'Josefin Slab';
+    font-size: 50px;
+}
+
+.matrixTable {
+    font-family: 'Josefin Slab';
+}
+
+.createRehearsalBtn {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.matrixTable {
+    padding-top: 10px;
+}

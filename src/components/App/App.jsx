@@ -36,7 +36,9 @@ function App() {
   }, [dispatch]);
 
   return (
+    
     <Router>
+      <h1 className="appTitle">Rehearsal Tracker</h1>
       <div>
         <Nav />
         <Switch>
