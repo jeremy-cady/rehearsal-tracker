@@ -7,7 +7,36 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
     
     const queryText = `
-        SELECT * FROM "rehearsal";`
+        SELECT 
+            "productions".production_name AS production_name,
+            "rehearsal".production_id AS production_id,
+            "rehearsal".start_time AS start_time,
+            "rehearsal".end_time AS end_time,
+            "rehearsal".act AS act,
+            "rehearsal".scene AS scene,
+            "rehearsal".page_numbers AS pages,
+            "rehearsal".measures AS measures,
+            ARRAY_AGG("artists".first_name || ' ' || "artists".last_name) AS names,
+	        ARRAY_AGG("artists".email) AS email,
+	        ARRAY_AGG("artists".phone_number) AS phone
+        FROM "productions"
+        JOIN "rehearsal"
+	        ON "productions".id = "rehearsal".production_id
+        JOIN "rehearsals_artists"
+	        ON "rehearsal".id = "rehearsals_artists".rehearsal_id
+        JOIN "artists"
+	        ON "rehearsals_artists".artist_id = "artists".id
+        GROUP BY 
+            "rehearsal".id,
+            "productions".production_name,
+            "rehearsal".production_id,
+            "rehearsal".start_time,
+            "rehearsal".end_time,
+            "rehearsal".act,
+            "rehearsal".scene,
+            "rehearsal".page_numbers,
+            "rehearsal".measures;
+        `
 
 
     pool.query(queryText)

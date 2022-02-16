@@ -51,6 +51,7 @@ function RehearsalDetailsArtistTable() {
                             sx={{
                                 fontFamily: 'Josefin Slab',
                                 textAlign: 'center',
+                                fontSize: '18px'
                             }}
                         >
                             Name
@@ -60,6 +61,7 @@ function RehearsalDetailsArtistTable() {
                             sx={{
                                 fontFamily: 'Josefin Slab',
                                 textAlign: 'center',
+                                fontSize: '18px'
                             }}
                         >
                             Email
@@ -69,6 +71,7 @@ function RehearsalDetailsArtistTable() {
                             sx={{
                                 fontFamily: 'Josefin Slab',
                                 textAlign: 'center',
+                                fontSize: '18px'
                             }}
                         >
                             Phone
@@ -84,6 +87,7 @@ function RehearsalDetailsArtistTable() {
                                     sx={{
                                         fontFamily: 'Josefin Slab',
                                         textAlign: 'center',
+                                        fontSize: '18px'
                                     }}
                                 >
                                     {selectedArtist.first_name} {selectedArtist.last_name}
@@ -93,6 +97,7 @@ function RehearsalDetailsArtistTable() {
                                     sx={{
                                         fontFamily: 'Josefin Slab',
                                         textAlign: 'center',
+                                        fontSize: '18px'
                                     }}
                                 >
                                     {selectedArtist.email}
@@ -102,6 +107,7 @@ function RehearsalDetailsArtistTable() {
                                     sx={{
                                         fontFamily: 'Josefin Slab',
                                         textAlign: 'center',
+                                        fontSize: '18px'
                                     }}
                                 >
                                     {selectedArtist.phone_number}

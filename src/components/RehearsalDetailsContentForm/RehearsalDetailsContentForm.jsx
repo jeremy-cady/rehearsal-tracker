@@ -88,6 +88,7 @@ function RehearsalDetailsContentForm() {
             <FormGroup row={true} className="inputGroup">
 
                 <TextField
+                    className="contentInputField"
                     variant="outlined"
                     type="text"
                     placeholder="Act"
@@ -97,6 +98,7 @@ function RehearsalDetailsContentForm() {
                 </TextField>
 
                 <TextField
+                    className="contentInputField"
                     variant="outlined"
                     type="text"
                     placeholder="Scene"
@@ -106,6 +108,7 @@ function RehearsalDetailsContentForm() {
                 </TextField>
 
                 <TextField
+                    className="contentInputField"
                     variant="outlined"
                     type="text"
                     placeholder="Pages"
@@ -115,6 +118,10 @@ function RehearsalDetailsContentForm() {
                 </TextField>
 
                 <TextField
+                    className="contentInputField"
+                    sx={{
+                        fontFamily: 'Josefin Slab'
+                    }}
                     variant="outlined"
                     type="text"
                     placeholder="Measures"
@@ -140,9 +147,32 @@ function RehearsalDetailsContentForm() {
                     Back
                 </Button>
 
-                <button onClick={onSubmit}>Submit</button>
+                <Button 
+                    onClick={onSubmit}
+                    variant="contained"
+                    className="contentFormGroupBtn"
+                    sx={{
+                        background: '#191970',
+                        fontFamily: 'Josefin Slab',
+                        marginLeft: '50px',
+                        marginRight: '50px'
+                    }}
+                >
+                    Submit
+                </Button>
 
-                <button onClick={onNext}>Artists Page➡️</button>
+                <Button
+                    onClick={onNext}
+                    variant="contained"
+                    className="contentFormGroupBtn"
+                    sx={{
+                        background: '#191970',
+                        fontFamily: 'Josefin Slab'
+                    }}
+                >
+                    Artists Page
+                    <ArrowForwardIcon></ArrowForwardIcon>
+                </Button>
 
             </FormGroup>
 
