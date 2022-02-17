@@ -62,8 +62,8 @@ function RehearsalMatrix() {
                         color: 'white',
                         background: '#191970',
                         fontFamily: 'Josefin Slab',
-                        margin: '10px',
-
+                        marginBottom: '30px',
+                        marginTop: '20px'
                     }}
                     className="createRehearsalBtn"
                     onClick={onNext}

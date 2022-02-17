@@ -45,6 +45,7 @@
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom: 185px;
 }
 
 .rehearsalTimes {

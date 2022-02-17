@@ -44,24 +44,26 @@ function Productions() {
         <>
             <h1 className="pageTitle">Productions</h1>
 
-            {productions.map(production => {
-                return (
-                   
-                        <div 
-                            key={production.id}
-                            className="productionTitle"
-                        >   
-                            <Link 
-                                onClick={()=>onSelect(production)}
-                                className="titleLink"
-                            >
-                                {production.production_name}
-                            </Link>
-                        </div>
-    
-                )
-            })}
-
+            <Box className="linksBox">
+                {productions.map(production => {
+                    return (
+                    
+                            <div 
+                                key={production.id}
+                                className="productionTitle"
+                            >   
+                                <Link 
+                                    onClick={()=>onSelect(production)}
+                                    className="titleLink"
+                                >
+                                    {production.production_name}
+                                </Link>
+                            </div>
+                
+        
+                    )
+                })}
+            </Box>
 
         </>
 
