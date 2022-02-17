@@ -2,6 +2,23 @@ import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import './Artists.css';
+
+import { 
+    Table, 
+    TableHead, 
+    TableRow, 
+    TableBody,
+    TableCell,
+    Button, 
+    Box,
+    FormControl,
+    FormGroup,
+    TextField,
+ } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 function Artists() {
     console.log('in Artists');
 
@@ -67,70 +84,242 @@ function Artists() {
 
     return (
         <>
-            <h3><u>All Artists</u></h3>
+            <h1 className="allArtistsTitle">All Artists</h1>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {artists.map(artist => {
-                        return(
-                            <tr key={artist.id}>
-                                <td>{artist.first_name}</td>
-                                <td>{artist.last_name}</td>
-                                <td>{artist.email}</td>
-                                <td>{artist.phone_number}</td>
-                                <td><button onClick={() => deleteArtist(artist)}>❌</button></td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+            <Box className="addArtistForm">
+                <h3 className="addNewArtistTitle">Add A New Artist</h3>
 
-            <h3><u>Add A New Artists</u></h3>
+                <FormControl>
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="First Name"
-                    value={firstName}
-                    onChange={event => setFirstName(event.target.value)}
-                />
+                    <FormGroup row={true}>
 
-                <input
-                    type="text"
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChange={event => setLastName(event.target.value)}
-                />
+                        <Button 
+                            onClick={onBack}
+                            variant="contained"
+                            sx={{
+                                background: '#191970',
+                                fontFamily: 'Josefin Slab',
+                                marginRight: '10px'
+                            }}
+                        >
+                            <ArrowBackIcon></ArrowBackIcon>
+                            Back
+                        </Button>
 
-                <input
-                    type="text"
-                    placeholder="Email"
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
-                />
+                        <TextField
+                            className="artistInput"
+                            sx={{
+                                marginLeft: '10px',
+                                marginRight: '10px'
+                            }}
+                            type="text"
+                            placeholder="First Name"
+                            value={firstName}
+                            onChange={event => setFirstName(event.target.value)}
+                        >    
+                        </TextField>
+                        
+                        <TextField
+                            className="artistInput"
+                            sx={{
+                                marginLeft: '10px',
+                                marginRight: '10px'
+                            }}
+                            type="text"
+                            placeholder="Last Name"
+                            value={lastName}
+                            onChange={event => setLastName(event.target.value)}
+                        >
+                        </TextField>
 
-                <input
-                    type="text"
-                    placeholder="Phone"
-                    value={phone}
-                    onChange={event => setPhone(event.target.value)}
-                />
+                        <TextField
+                            className="artistInput"
+                            sx={{
+                                marginLeft: '10px',
+                                marginRight: '10px'
+                            }}
+                            type="text"
+                            placeholder="Email"
+                            value={email}
+                            onChange={event => setEmail(event.target.value)}
+                        >
+                        </TextField>
 
-                <button>Submit</button>
-            </form>
+                        <TextField
+                            className="artistInput"
+                            sx={{
+                                marginLeft: '10px',
+                                marginRight: '10px'
+                            }}
+                            type="text"
+                            placeholder="Phone"
+                            value={phone}
+                            onChange={event => setPhone(event.target.value)}
+                        >
+                        </TextField>
 
-            <div>
-                <button onClick={onBack}>⬅️Back</button>
-            </div>
+                        <Button 
+                            onClick={handleSubmit}
+                            variant="contained"
+                            sx={{
+                                background: '#191970',
+                                fontFamily: 'Josefin Slab',
+                                marginLeft: '10px'
+                            }}
+                        >
+                            Submit
+                        </Button>
+
+                    </FormGroup>
+
+                </FormControl>
+
+            </Box>
+
+            <Box className="allArtistsTableBox">
+
+                <Table 
+                    className="allArtistsTable"
+                    sx={{
+                        width: '1400px',
+                        marginBottom: '180px'
+                    }}
+                >
+                    <TableHead>
+
+                        <TableRow className="tableHeaderRow">
+
+                            <TableCell 
+                                className="tableCell"
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px'
+                                }}
+                            >
+                                First Name
+                            </TableCell>
+
+                            <TableCell 
+                                className="tableCell"
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px'
+                                }}
+                            >
+                                Last Name
+                            </TableCell>
+
+                            <TableCell 
+                                className="tableCell"
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px'
+                                }}
+                            >
+                                Email
+                            </TableCell>
+
+                            <TableCell 
+                                className="tableCell"
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px'
+                                }}
+                            >
+                                Phone
+                            </TableCell>
+
+                            <TableCell 
+                                className="tableCell"
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px'
+                                }}
+                            >
+                                Delete
+                            </TableCell>
+
+                        </TableRow>
+
+                    </TableHead>
+
+                    <TableBody>
+
+                        {artists.map(artist => {
+                            return(
+                                <TableRow key={artist.id} hover={true}>
+
+                                    <TableCell
+                                        className="tableCell"
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px'
+                                        }}
+                                    >
+                                        {artist.first_name}
+                                    </TableCell>
+
+                                    <TableCell
+                                        className="tableCell"
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px'
+                                        }}
+                                    >
+                                        {artist.last_name}
+                                    </TableCell>
+
+                                    <TableCell
+                                        className="tableCell"
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px'
+                                        }}
+                                    >
+                                        {artist.email}
+                                    </TableCell>
+
+                                    <TableCell
+                                        className="tableCell"
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px'
+                                        }}
+                                    >
+                                        {artist.phone_number}
+                                    </TableCell>
+
+                                    <TableCell
+                                        className="tableCell"
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px'
+                                        }}
+                                    >
+                                        <DeleteIcon onClick={() => deleteArtist(artist)}></DeleteIcon>
+
+                                    </TableCell>
+
+                                </TableRow>
+                            )
+                        })}
+
+                    </TableBody>
+
+                </Table>
+
+            </Box>
+        
         </>
     )
 }

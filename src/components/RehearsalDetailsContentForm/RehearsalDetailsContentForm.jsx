@@ -89,6 +89,10 @@ function RehearsalDetailsContentForm() {
 
                 <TextField
                     className="contentInputField"
+                    sx={{
+                        marginLeft: '10px',
+                        marginRight: '10px'
+                    }}
                     variant="outlined"
                     type="text"
                     placeholder="Act"
@@ -99,6 +103,10 @@ function RehearsalDetailsContentForm() {
 
                 <TextField
                     className="contentInputField"
+                    sx={{
+                        marginLeft: '10px',
+                        marginRight: '10px'
+                    }}
                     variant="outlined"
                     type="text"
                     placeholder="Scene"
@@ -109,6 +117,10 @@ function RehearsalDetailsContentForm() {
 
                 <TextField
                     className="contentInputField"
+                    sx={{
+                        marginLeft: '10px',
+                        marginRight: '10px'
+                    }}
                     variant="outlined"
                     type="text"
                     placeholder="Pages"
@@ -120,7 +132,8 @@ function RehearsalDetailsContentForm() {
                 <TextField
                     className="contentInputField"
                     sx={{
-                        fontFamily: 'Josefin Slab'
+                        marginLeft: '10px',
+                        marginRight: '10px'
                     }}
                     variant="outlined"
                     type="text"

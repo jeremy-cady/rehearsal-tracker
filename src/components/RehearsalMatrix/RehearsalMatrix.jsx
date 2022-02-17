@@ -39,7 +39,7 @@ function RehearsalMatrix() {
     }
 
     const deleteRehearsal = (rehearsal) => {
-        console.log('delete', rehearsal);
+        console.log('delete', rehearsal.id);
         dispatch({
             type: 'DELETE_REHEARSAL',
             payload: rehearsal

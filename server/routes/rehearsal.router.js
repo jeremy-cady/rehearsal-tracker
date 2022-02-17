@@ -9,6 +9,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText = `
         SELECT 
             "productions".production_name AS production_name,
+            "rehearsal".id,
             "rehearsal".production_id AS production_id,
             "rehearsal".start_time AS start_time,
             "rehearsal".end_time AS end_time,
