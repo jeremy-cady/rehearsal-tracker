@@ -1,0 +1,20 @@
+.pageTitle {
+    color: #191970;
+}
+
+.productionTitle {
+    display: flex;
+    justify-content: center;
+    color: #191970;
+}
+
+.titleLink {
+    font-family: 'Josefin Slab';
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.linksBox {
+    margin-bottom: 340px;
+}

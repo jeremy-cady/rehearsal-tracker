@@ -36,7 +36,9 @@ function App() {
   }, [dispatch]);
 
   return (
+    
     <Router>
+      <h1 className="appTitle">Rehearsal Tracker</h1>
       <div>
         <Nav />
         <Switch>
@@ -147,7 +149,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/rehearsalMatrix" />
               :
               // Otherwise, show the Landing page
               <LandingPage />
@@ -159,7 +161,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   );

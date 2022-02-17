@@ -2,6 +2,21 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 
+import './RehearsalDetailsContentForm.css';
+
+import { 
+    Button, 
+    Box, 
+    FormControl,
+    FormGroup,
+    Input,
+    TextField,
+} 
+from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 
 function RehearsalDetailsContentForm() {
 
@@ -10,7 +25,7 @@ function RehearsalDetailsContentForm() {
 
     useEffect(() => {
         fetchArtistsForRehearsal();
-    }, [selectedArtists]);
+    }, []);
 
     const rehearsal = useSelector(store => store.setSelectedRehearsal);
     console.log('rehearsal id is:', rehearsal.id);
@@ -53,7 +68,6 @@ function RehearsalDetailsContentForm() {
                 scene: scene,
                 page_numbers: pages,
                 measures: measures,
-                artists: selectedArtists,
                 id: rehearsal.id,
             }
         })
@@ -69,41 +83,113 @@ function RehearsalDetailsContentForm() {
     }
 
     return(
-        <form>
-                <input
+        <FormControl>
+
+            <FormGroup row={true} className="inputGroup">
+
+                <TextField
+                    className="contentInputField"
+                    sx={{
+                        marginLeft: '10px',
+                        marginRight: '10px'
+                    }}
+                    variant="outlined"
                     type="text"
                     placeholder="Act"
                     value={act}
                     onChange={event => setAct(event.target.value)}
-                />
+                >
+                </TextField>
 
-                <input
+                <TextField
+                    className="contentInputField"
+                    sx={{
+                        marginLeft: '10px',
+                        marginRight: '10px'
+                    }}
+                    variant="outlined"
                     type="text"
                     placeholder="Scene"
                     value={scene}
                     onChange={event => setScene(event.target.value)}
-                />
+                >
+                </TextField>
 
-                <input
+                <TextField
+                    className="contentInputField"
+                    sx={{
+                        marginLeft: '10px',
+                        marginRight: '10px'
+                    }}
+                    variant="outlined"
                     type="text"
                     placeholder="Pages"
                     value={pages}
                     onChange={event => setPages(event.target.value)}
-                />
+                >
+                </TextField>
 
-                <input
+                <TextField
+                    className="contentInputField"
+                    sx={{
+                        marginLeft: '10px',
+                        marginRight: '10px'
+                    }}
+                    variant="outlined"
                     type="text"
                     placeholder="Measures"
                     value={measures}
                     onChange={event => setMeasures(event.target.value)}
-                />
+                >
+                </TextField>
 
-                <div>
-                    <button onClick={onBack}>⬅️Back</button>
-                    <button onClick={onSubmit}>Submit</button>
-                    <button onClick={onNext}>Artists Page➡️</button>
-                </div>
-            </form>
+            </FormGroup>
+
+            <FormGroup row={true} className="buttonGroup">
+
+                <Button 
+                    onClick={onBack}
+                    variant="contained"
+                    className="contentFormGroupBtn"
+                    sx={{
+                        background: '#191970',
+                        fontFamily: 'Josefin Slab'
+                    }}
+                >
+                    <ArrowBackIcon></ArrowBackIcon>
+                    Back
+                </Button>
+
+                <Button 
+                    onClick={onSubmit}
+                    variant="contained"
+                    className="contentFormGroupBtn"
+                    sx={{
+                        background: '#191970',
+                        fontFamily: 'Josefin Slab',
+                        marginLeft: '50px',
+                        marginRight: '50px'
+                    }}
+                >
+                    Submit
+                </Button>
+
+                <Button
+                    onClick={onNext}
+                    variant="contained"
+                    className="contentFormGroupBtn"
+                    sx={{
+                        background: '#191970',
+                        fontFamily: 'Josefin Slab'
+                    }}
+                >
+                    Artists Page
+                    <ArrowForwardIcon></ArrowForwardIcon>
+                </Button>
+
+            </FormGroup>
+
+        </FormControl>
 
     )
 }

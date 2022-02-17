@@ -41,6 +41,17 @@ function* createArtist(action) {
 }
 
 
+function* deleteArtist(action) {
+    console.log('made it to deleteArtist');
+   
+    yield axios.delete(`/api/artists/${action.payload.id}`);
+    
+    yield put({
+        type: 'FETCH_ARTISTS'
+    })
+}
+
+
 function* markArtistSelected(action) {
     console.log('made it to markArtistSelected', action.payload);
     
@@ -72,6 +83,7 @@ function* fetchArtistsForRehearsal(action){
 
 function* artistSaga() {
     yield takeEvery('CREATE_ARTIST', createArtist);
+    yield takeEvery('DELETE_ARTIST', deleteArtist);
     yield takeEvery('FETCH_ARTISTS', fetchArtists);
     yield takeEvery('MARK_ARTIST_SELECTED', markArtistSelected);
     yield takeEvery('FETCH_SELECTED_ARTISTS_LIST', fetchSelectedArtistsList),

@@ -4,6 +4,15 @@ import { useDispatch } from "react-redux";
 import { Link, useHistory } from 'react-router-dom';
 import './Productions.css';
 
+import { 
+    Table, 
+    TableHead, 
+    TableRow, 
+    TableBody,
+    Button, 
+    Box } 
+from '@mui/material';
+
 function Productions() {
     const dispatch = useDispatch();
     const productions = useSelector(store => store.productions);
@@ -33,15 +42,29 @@ function Productions() {
 
     return (
         <>
-            <h1><u>Productions</u></h1>
-            {productions.map(production => {
-                return (
-                    <div key={production.id}>
-                        <Link onClick={()=>onSelect(production)}>{production.production_name}</Link>
-                        {console.log('production id is:', production.id)}
-                    </div>
-                )
-            })}
+            <h1 className="pageTitle">Productions</h1>
+
+            <Box className="linksBox">
+                {productions.map(production => {
+                    return (
+                    
+                            <div 
+                                key={production.id}
+                                className="productionTitle"
+                            >   
+                                <Link 
+                                    onClick={()=>onSelect(production)}
+                                    className="titleLink"
+                                >
+                                    {production.production_name}
+                                </Link>
+                            </div>
+                
+        
+                    )
+                })}
+            </Box>
+
         </>
 
     )

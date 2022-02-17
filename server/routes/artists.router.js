@@ -65,6 +65,28 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+
+    const queryText = `
+        DELETE FROM "artists"
+        WHERE "id" = $1;
+        `;
+
+    const queryParams = [
+        req.params.id
+    ]
+
+    pool.query(queryText, queryParams)
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('DELETE failed', error);
+            res.sendStatus(500);
+        })
+})
+
+
+
 module.exports = router;
 
 

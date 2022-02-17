@@ -1,6 +1,23 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import './RehearsalDetailsArtistForm.css';
+
+import { 
+    Table, 
+    TableHead, 
+    TableRow, 
+    TableBody,
+    Button, 
+    Box, 
+    Select,
+    MenuItem,
+    FormControl,
+    FormGroup,
+} 
+from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 function RehearsalDetailsArtistForm() {
     const dispatch = useDispatch();
@@ -45,19 +62,50 @@ function RehearsalDetailsArtistForm() {
     }
 
     return(
-        <form>
-            <select onChange={event => setSelectedArtistId(event.target.value)}>
-                <option></option>
-                {artists.map(artist => {
-                    return(
-                            <option key={artist.id} value={artist.id}>
-                                {artist.first_name} {artist.last_name}
-                            </option>
-                    )
-                })}
-            </select>
-            <button onClick={markArtistSelected}>Add</button>
-        </form>
+        <Box className="addArtistFormBox">
+            <FormControl className="addArtistForm">
+                <FormGroup className="addArtistFormGroup" row={true}>
+                    <Select 
+                        onChange={event => setSelectedArtistId(event.target.value)}
+                        className="artistSelect"
+                        sx={{
+                            width: '200px',
+                            height: '40px',
+                            fontFamily: 'Josefin Slab'
+                        }}    
+                    >
+                        <MenuItem></MenuItem>
+                        {artists.map(artist => {
+                            return(
+                                <MenuItem 
+                                    key={artist.id} 
+                                    value={artist.id}
+                                    sx={{
+                                        fontFamily: 'Josefin Slab'
+                                    }}
+                                >
+                                    {artist.first_name} {artist.last_name}
+                                </MenuItem>
+                            )
+                        })}
+                    </Select>
+                
+                    <Button 
+                        onClick={markArtistSelected}
+                        variant='contained'
+                        sx={{
+                            background: '#191970',
+                            fontFamily: 'Josefin Slab',
+                            marginLeft: '40px'
+                        }}
+                    >
+                        Add
+                    </Button>
+
+                </FormGroup>
+                
+            </FormControl>
+        </Box>
     )
 }
 

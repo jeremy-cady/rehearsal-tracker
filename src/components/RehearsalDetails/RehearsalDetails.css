@@ -1,3 +1,45 @@
-thead, tr, th {
-    border: solid black 1px;
+.productionTitle {
+    font-family: 'Josefin Slab';
+    font-size: 50px;
+}
+
+.addArtistTitle {
+    font-family: 'Josefin Slab';
+    font-size: 30px;
+    color: #191970;
+}
+
+.addedArtistsTitle {
+    font-family: 'Josefin Slab';
+    font-size: 30px;
+    color: #191970;
+}
+
+.addContentTitle {
+    font-family: 'Josefin Slab';
+    font-size: 30px;
+    color: #191970;
+}
+
+.artistFormBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.artistTableBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+.rehearsalContentBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

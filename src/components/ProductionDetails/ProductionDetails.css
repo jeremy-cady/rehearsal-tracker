@@ -1,0 +1,54 @@
+.selectedProductionTitle {
+    font-family: 'Josefin Slab';
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #191970;
+    font-size: 50px;
+}
+
+.rehearsalTitle {
+    font-family: 'Josefin Slab';
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color: #191970;
+}
+
+.calendarForm {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    font-family: 'Josefin Slab';
+    font-size: 20px;
+}
+
+.backBtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.date1 {
+    margin-right: 20px;
+}
+
+.date2 {
+    margin-left: 20px;
+}
+
+.rehearsalList {
+    font-family: 'Josefin Slab';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 185px;
+}
+
+.rehearsalTimes {
+    margin-left: 30px;
+    margin-left: 30px;
+}

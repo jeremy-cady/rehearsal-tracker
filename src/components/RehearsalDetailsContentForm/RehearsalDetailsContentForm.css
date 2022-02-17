@@ -1,0 +1,13 @@
+.inputGroup {
+    margin-bottom: 40px;
+}
+
+.buttonGroup {
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+::-webkit-input-placeholder {
+    font-family: 'Josefin Slab';
+}

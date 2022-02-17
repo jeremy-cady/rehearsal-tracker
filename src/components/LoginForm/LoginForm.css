@@ -1,0 +1,36 @@
+.loginTitle {
+    font-family: 'Josefin Slab';
+    font-size: 30px;
+    text-align: center;
+    color: #191970;
+}
+
+.userName {
+    font-family: 'Josefin Slab';
+}
+
+.password {
+    font-family: 'Josefin Slab';
+}
+
+.formPanel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginBox {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 255px;
+}
+
+.passwordInput {
+    display: flex;
+   
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+  }
+  

@@ -2,6 +2,20 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import './RehearsalMatrix.css';
+
+import { 
+    Table, 
+    TableHead, 
+    TableRow, 
+    TableBody,
+    TableCell,
+    Button, 
+    Box,
+    Select,
+    MenuItem,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function RehearsalMatrix() {
     const dispatch = useDispatch();
@@ -25,7 +39,7 @@ function RehearsalMatrix() {
     }
 
     const deleteRehearsal = (rehearsal) => {
-        console.log('delete', rehearsal);
+        console.log('delete', rehearsal.id);
         dispatch({
             type: 'DELETE_REHEARSAL',
             payload: rehearsal
@@ -36,59 +50,282 @@ function RehearsalMatrix() {
 
     return (
         <>
-            <h1>Rehearsal Matrix</h1>
+            <h1 className="pageTitle">Rehearsal Matrix</h1>
 
-            <button onClick={onNext}>Create A New Rehearsal</button>
+            <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center">
+                <Button 
+                    variant="contained"
+                    sx={{ 
+                        color: 'white',
+                        background: '#191970',
+                        fontFamily: 'Josefin Slab',
+                        marginBottom: '30px',
+                        marginTop: '20px'
+                    }}
+                    className="createRehearsalBtn"
+                    onClick={onNext}
+                >
+                        Create A New Rehearsal
+                </Button>
+            </Box>
+            
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Production</th>
-                        <th>Date</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Act</th>
-                        <th>Scene</th>
-                        <th>Pages</th>
-                        <th>Measures</th>
-                        <th>Artists</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rehearsals.map(rehearsal => {
-                        return(
-                            <tr key={rehearsal.id}>
-                                <td>{rehearsal.production_name}</td>
-                                <td>{moment(rehearsal.start_time).format('MM-DD-YYYY')}</td>
-                                <td>{moment(rehearsal.start_time).format('h:mm a')}</td>
-                                <td>{moment(rehearsal.end_time).format('h:mm a')}</td>
-                                <td>{rehearsal.act}</td>
-                                <td>{rehearsal.scene}</td>
-                                <td>{rehearsal.page_numbers}</td>
-                                <td>{rehearsal.measures}</td>
-                                <td>{rehearsal.artists}</td>
-                                {/* <td>
-                                    <select>
-                                        <option></option>
-                                        {rehearsal.artists.map(artist => {
-                                            return(
-                                                <option key={artist.id}>
-                                                    {artist.first_name} {artist.last_name}
-                                                </option>
-                                            )
-                                        })}
-                                    </select>
-                                </td> */}
-                                <td><button onClick={() => deleteRehearsal(rehearsal)}>❌</button></td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+            <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                
+            >
+                <Table 
+                    className="matrixTable"
+                    sx={{
+                        marginTop: "30px",
+                        width: "1500px"
+                    }}
+                >
+                    <TableHead>
+                        <TableRow
+                            sx={{
+                                background: "#B0C4DE", 
+                            }}>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Production
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Date
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Start Time
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                End Time
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Act
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Scene
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Pages
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Measures
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Artists
+                            </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Delete
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rehearsals.map(rehearsal => {
+                            return(
+                                <TableRow key={rehearsal.id}>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        {rehearsal.production_name}
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        {moment(rehearsal.start_time).format('MM-DD-YYYY')}
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        {moment(rehearsal.start_time).format('h:mm a')}
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        {moment(rehearsal.end_time).format('h:mm a')}
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        {rehearsal.act}
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        {rehearsal.scene}
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        {rehearsal.pages}
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        {rehearsal.measures}
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                       <Select>
+                                           <MenuItem></MenuItem>
+                                           {rehearsal.names.map(name => {
+                                               return(
+                                                    <MenuItem
+                                                        sx={{
+                                                            fontFamily: 'Josefin Slab',
+                                                            fontSize: '18px',
+                                                        }}
+                                                    >
+                                                       {name}
+                                                    </MenuItem>
+                                               )                                                   
+                                               })
+                                           })
+                                       </Select>
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        <DeleteIcon 
+                                            onClick={() => deleteRehearsal(rehearsal)}
+                                        >
+                                        </DeleteIcon>
+                                    </TableCell>
+            
+                                </TableRow>
+                            )
+                        })}
+                    </TableBody>
+                </Table>
+            </Box>
         </>
     )
 }
 
 
 export default RehearsalMatrix;
+
