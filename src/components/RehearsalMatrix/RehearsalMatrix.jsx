@@ -54,38 +54,35 @@ function RehearsalMatrix() {
 
     const sendEmail = (rehearsal) => {
 
-        let names = rehearsal.names;
-        let email = rehearsal.email;
-        let date = moment(rehearsal.start_time).format('MM-DD-YYYY');
-        let startTime = moment(rehearsal.start_time).format('h:mm a');
-        let endTime = moment(rehearsal.end_time).format('h:mm a');
-        let act = rehearsal.act;
-        let scene = rehearsal.scene;
-        let pages = rehearsal.pages;
-        let measures = rehearsal.measures;
+        
+        let templateParams = {
+            email: rehearsal.email,
+            date: moment(rehearsal.start_time).format('MM-DD-YYYY'),
+            startTime: moment(rehearsal.start_time).format('h:mm a'),
+            endTime: moment(rehearsal.end_time).format('h:mm a'),
+            act: rehearsal.act,
+            scene: rehearsal.scene,
+            pages: rehearsal.pages,
+            measures: rehearsal.measures,
+        }
+
+        let serviceID = 'service_fbrp49d';
+
+        let templateID = 'template_si5tp6u';
+
+        let userID = 'user_3GYNO1mUdxArTOYsVk7dR';
 
         // for(let email of emails) {
         //     console.log(email);
         //     return email;
         // }
         
-        emailjs.send(
-            '05d4e9330014df57e8d9931af551b9c8',
-            'template_si5tp6u',
-            email, 
-            date, 
-            startTime, 
-            endTime, 
-            act, 
-            scene, 
-            pages, 
-            measures, 
-            'user_3GYNO1mUdxArTOYsVk7dR')
+        emailjs.send(serviceID, templateID, templateParams, userID)
                 .then((result) => {
                     console.log(result.text);
                 }).catch((error) => {
                     console.log(error.text);
-                })
+                });
     }
 
 
