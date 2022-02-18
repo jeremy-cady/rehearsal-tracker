@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const nodemailer = require('nodemailer');
 
 const app = express();
 

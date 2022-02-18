@@ -26,6 +26,19 @@ import RehearsalMatrix from '../RehearsalMatrix/RehearsalMatrix';
 
 import './App.css';
 
+import { 
+  Table, 
+  TableHead, 
+  TableRow, 
+  TableBody,
+  TableCell,
+  Button, 
+  Box,
+  FormControl,
+  FormGroup,
+  TextField,
+} from '@mui/material';
+
 function App() {
   const dispatch = useDispatch();
 
@@ -38,7 +51,12 @@ function App() {
   return (
     
     <Router>
-      <h1 className="appTitle">Rehearsal Tracker</h1>
+    
+      <div className="rtImage"><img src="RT.png" width="150" height="150"/></div>
+      
+      <h1 className="appTitle">RehearsalTracker</h1>
+      
+     
       <div>
         <Nav />
         <Switch>

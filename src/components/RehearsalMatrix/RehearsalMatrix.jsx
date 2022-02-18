@@ -1,3 +1,6 @@
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { init } from '@emailjs/browser';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
@@ -16,10 +19,12 @@ import {
     MenuItem,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { EmailOutlined } from '@mui/icons-material';
 
 function RehearsalMatrix() {
     const dispatch = useDispatch();
     const history = useHistory();
+    init("user_3GYNO1mUdxArTOYsVk7dR");
 
     useEffect(() => {
         fetchRehearsals();
@@ -44,6 +49,43 @@ function RehearsalMatrix() {
             type: 'DELETE_REHEARSAL',
             payload: rehearsal
         })
+    }
+
+
+    const sendEmail = (rehearsal) => {
+
+        let names = rehearsal.names;
+        let email = rehearsal.email;
+        let date = moment(rehearsal.start_time).format('MM-DD-YYYY');
+        let startTime = moment(rehearsal.start_time).format('h:mm a');
+        let endTime = moment(rehearsal.end_time).format('h:mm a');
+        let act = rehearsal.act;
+        let scene = rehearsal.scene;
+        let pages = rehearsal.pages;
+        let measures = rehearsal.measures;
+
+        // for(let email of emails) {
+        //     console.log(email);
+        //     return email;
+        // }
+        
+        emailjs.send(
+            '05d4e9330014df57e8d9931af551b9c8',
+            'template_si5tp6u',
+            email, 
+            date, 
+            startTime, 
+            endTime, 
+            act, 
+            scene, 
+            pages, 
+            measures, 
+            'user_3GYNO1mUdxArTOYsVk7dR')
+                .then((result) => {
+                    console.log(result.text);
+                }).catch((error) => {
+                    console.log(error.text);
+                })
     }
 
 
@@ -191,6 +233,16 @@ function RehearsalMatrix() {
                             >
                                 Delete
                             </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Send Email
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -314,6 +366,27 @@ function RehearsalMatrix() {
                                             onClick={() => deleteRehearsal(rehearsal)}
                                         >
                                         </DeleteIcon>
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        <Button 
+                                            variant="contained"
+                                            sx={{
+                                                fontFamily: 'Josefin Slab',
+                                                textAlign: 'center',
+                                                fontSize: '16px',
+                                                background: '#191970'
+                                            }}
+                                            onClick={() => sendEmail(rehearsal)}
+                                        >
+                                            Send
+                                        </Button>
                                     </TableCell>
             
                                 </TableRow>
