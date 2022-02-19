@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import swal from 'sweetalert';
 import './RehearsalMatrix.css';
 
 import { 
@@ -71,19 +72,49 @@ function RehearsalMatrix() {
         let templateID = 'template_si5tp6u';
 
         let userID = 'user_3GYNO1mUdxArTOYsVk7dR';
-
-        // for(let email of emails) {
-        //     console.log(email);
-        //     return email;
-        // }
         
         emailjs.send(serviceID, templateID, templateParams, userID)
                 .then((result) => {
                     console.log(result.text);
+                    if(result.text==="OK") {
+                        swal("Rehearsal notification has been sent!", {
+                            icon: "success",
+                        })
+                    }
                 }).catch((error) => {
                     console.log(error.text);
                 });
     }
+
+
+    const deleteAlert = (rehearsal) => {
+        swal({
+            title: "Are you sure you want to delete this rehearsal?",
+            text: "Once deleted, you will not be able to recover the data!",
+            icon: "warning",
+            buttons: {
+                cancel: "Cancel",
+                delete: {
+                    text: "Delete",
+                    value: "delete"
+            },
+        }})
+            .then((value) => {
+                switch(value) {
+                    case "delete":
+                        deleteRehearsal(rehearsal);
+                        swal(
+                            "The rehearsal has been deleted.",
+                            {icon: "success"})
+                        break;
+                    case "cancel":
+                        swal("The rehearsal was not deleted.");
+                        break;
+              }
+          })
+    }
+
+
 
 
 
@@ -360,7 +391,7 @@ function RehearsalMatrix() {
                                         }}
                                     >
                                         <DeleteIcon 
-                                            onClick={() => deleteRehearsal(rehearsal)}
+                                            onClick={() => deleteAlert(rehearsal)}
                                         >
                                         </DeleteIcon>
                                     </TableCell>
