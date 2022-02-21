@@ -93,9 +93,7 @@ function ProductionDetails() {
                     <input
                         type="datetime-local"
                         id="startTime"
-                        name="startTime"
-                        min="2022-02-08T18:00"
-                        max="2022-03-25T23:59"    
+                        name="startTime"  
                         onChange={event => setStartTime(event.target.value)}
                     />
 
@@ -106,9 +104,7 @@ function ProductionDetails() {
                 <input
                     type="datetime-local"
                     id="endTime"
-                    name="endTime"
-                    min="2022-02-08T18:00"
-                    max="2022-03-25T23:59"  
+                    name="endTime" 
                     onChange={event => setEndTime(event.target.value)}  
                 />
 

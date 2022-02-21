@@ -1,7 +1,11 @@
+import React, { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { init } from '@emailjs/browser';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import swal from 'sweetalert';
 import './RehearsalMatrix.css';
 
 import { 
@@ -20,6 +24,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 function RehearsalMatrix() {
     const dispatch = useDispatch();
     const history = useHistory();
+    init("user_3GYNO1mUdxArTOYsVk7dR");
 
     useEffect(() => {
         fetchRehearsals();
@@ -45,6 +50,70 @@ function RehearsalMatrix() {
             payload: rehearsal
         })
     }
+
+
+    const sendEmail = (rehearsal) => {
+        
+        let templateParams = {
+            production: rehearsal.production_name,
+            email: rehearsal.email,
+            date: moment(rehearsal.start_time).format('MM-DD-YYYY'),
+            startTime: moment(rehearsal.start_time).format('h:mm a'),
+            endTime: moment(rehearsal.end_time).format('h:mm a'),
+            act: rehearsal.act,
+            scene: rehearsal.scene,
+            pages: rehearsal.pages,
+            measures: rehearsal.measures,
+        }
+
+        let serviceID = 'service_fbrp49d';
+
+        let templateID = 'template_si5tp6u';
+
+        let userID = 'user_3GYNO1mUdxArTOYsVk7dR';
+        
+        emailjs.send(serviceID, templateID, templateParams, userID)
+                .then((result) => {
+                    console.log(result.text);
+                    if(result.text==="OK") {
+                        swal("Rehearsal notification has been sent!", {
+                            icon: "success",
+                        })
+                    }
+                }).catch((error) => {
+                    console.log(error.text);
+                });
+    }
+
+
+    const deleteAlert = (rehearsal) => {
+        swal({
+            title: "Are you sure you want to delete this rehearsal?",
+            text: "Once deleted, you will not be able to recover the data!",
+            icon: "warning",
+            buttons: {
+                cancel: "Cancel",
+                delete: {
+                    text: "Delete",
+                    value: "delete"
+            },
+        }})
+            .then((value) => {
+                switch(value) {
+                    case "delete":
+                        deleteRehearsal(rehearsal);
+                        swal(
+                            "The rehearsal has been deleted.",
+                            {icon: "success"})
+                        break;
+                    case "cancel":
+                        swal("The rehearsal was not deleted.");
+                        break;
+              }
+          })
+    }
+
+
 
 
 
@@ -191,6 +260,16 @@ function RehearsalMatrix() {
                             >
                                 Delete
                             </TableCell>
+                            <TableCell 
+                                className="tableCell" 
+                                sx={{
+                                    fontFamily: 'Josefin Slab',
+                                    textAlign: 'center',
+                                    fontSize: '18px',
+                                }}
+                            >
+                                Send Email
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -311,9 +390,30 @@ function RehearsalMatrix() {
                                         }}
                                     >
                                         <DeleteIcon 
-                                            onClick={() => deleteRehearsal(rehearsal)}
+                                            onClick={() => deleteAlert(rehearsal)}
                                         >
                                         </DeleteIcon>
+                                    </TableCell>
+                                    <TableCell 
+                                        className="tableCell" 
+                                        sx={{
+                                            fontFamily: 'Josefin Slab',
+                                            textAlign: 'center',
+                                            fontSize: '18px',
+                                        }}
+                                    >
+                                        <Button 
+                                            variant="contained"
+                                            sx={{
+                                                fontFamily: 'Josefin Slab',
+                                                textAlign: 'center',
+                                                fontSize: '16px',
+                                                background: '#191970'
+                                            }}
+                                            onClick={() => sendEmail(rehearsal)}
+                                        >
+                                            Send
+                                        </Button>
                                     </TableCell>
             
                                 </TableRow>

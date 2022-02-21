@@ -14,6 +14,8 @@ import {
     MenuItem,
     FormControl,
     FormGroup,
+    InputLabel,
+    TextField,
 } 
 from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -65,7 +67,10 @@ function RehearsalDetailsArtistForm() {
         <Box className="addArtistFormBox">
             <FormControl className="addArtistForm">
                 <FormGroup className="addArtistFormGroup" row={true}>
-                    <Select 
+                    <TextField 
+                        label="Artists"
+                        InputLabelProps={{ shrink: true }}
+                        select
                         onChange={event => setSelectedArtistId(event.target.value)}
                         className="artistSelect"
                         sx={{
@@ -88,7 +93,7 @@ function RehearsalDetailsArtistForm() {
                                 </MenuItem>
                             )
                         })}
-                    </Select>
+                    </TextField>
                 
                     <Button 
                         onClick={markArtistSelected}

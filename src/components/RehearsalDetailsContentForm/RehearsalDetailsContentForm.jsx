@@ -4,11 +4,16 @@ import { useHistory } from 'react-router-dom';
 
 import './RehearsalDetailsContentForm.css';
 
+import swal from "sweetalert";
+
 import { 
     Button, 
     Box, 
     FormControl,
     FormGroup,
+    FormLabel,
+    FormControlLabel,
+    InputLabel,
     Input,
     TextField,
 } 
@@ -83,11 +88,14 @@ function RehearsalDetailsContentForm() {
     }
 
     return(
+    
         <FormControl>
 
             <FormGroup row={true} className="inputGroup">
 
                 <TextField
+                    label="Act"
+                    InputLabelProps={{ shrink: true }}
                     className="contentInputField"
                     sx={{
                         marginLeft: '10px',
@@ -99,9 +107,12 @@ function RehearsalDetailsContentForm() {
                     value={act}
                     onChange={event => setAct(event.target.value)}
                 >
+
                 </TextField>
 
                 <TextField
+                    label="Scene"
+                    InputLabelProps={{ shrink: true }}
                     className="contentInputField"
                     sx={{
                         marginLeft: '10px',
@@ -116,6 +127,8 @@ function RehearsalDetailsContentForm() {
                 </TextField>
 
                 <TextField
+                    label="Pages"
+                    InputLabelProps={{ shrink: true }}
                     className="contentInputField"
                     sx={{
                         marginLeft: '10px',
@@ -130,6 +143,8 @@ function RehearsalDetailsContentForm() {
                 </TextField>
 
                 <TextField
+                    label="Measures"
+                    InputLabelProps={{ shrink: true }}
                     className="contentInputField"
                     sx={{
                         marginLeft: '10px',
