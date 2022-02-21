@@ -53,7 +53,6 @@ function RehearsalMatrix() {
 
 
     const sendEmail = (rehearsal) => {
-        console.log(rehearsal.production_name);
         
         let templateParams = {
             production: rehearsal.production_name,
