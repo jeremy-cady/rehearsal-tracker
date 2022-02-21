@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import './Artists.css';
 
+import swal from 'sweetalert';
+
 import { 
     Table, 
     TableHead, 
@@ -15,6 +17,7 @@ import {
     FormControl,
     FormGroup,
     TextField,
+    InputLabel
  } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -80,6 +83,34 @@ function Artists() {
     }
 
 
+    const deleteAlert = (artist) => {
+        swal({
+            title: "Are you sure you want to delete this artist from the database?",
+            text: "Once deleted, you will not be able to recover the artist data!",
+            icon: "warning",
+            buttons: {
+                cancel: "Cancel",
+                delete: {
+                    text: "Delete",
+                    value: "delete"
+            },
+        }})
+            .then((value) => {
+                switch(value) {
+                    case "delete":
+                        deleteArtist(artist);
+                        swal(
+                            "The artist has been deleted from the database.",
+                            {icon: "success"})
+                        break;
+                    case "cancel":
+                        swal("The artist was not deleted from the database.");
+                        break;
+              }
+          })
+    }
+
+
     
 
     return (
@@ -108,6 +139,8 @@ function Artists() {
 
                         <TextField
                             className="artistInput"
+                            label="First Name"
+                            InputLabelProps={{ shrink: true }}
                             sx={{
                                 marginLeft: '10px',
                                 marginRight: '10px'
@@ -121,6 +154,8 @@ function Artists() {
                         
                         <TextField
                             className="artistInput"
+                            label="Last Name"
+                            InputLabelProps={{ shrink: true }}
                             sx={{
                                 marginLeft: '10px',
                                 marginRight: '10px'
@@ -134,6 +169,8 @@ function Artists() {
 
                         <TextField
                             className="artistInput"
+                            label="Email"
+                            InputLabelProps={{ shrink: true }}
                             sx={{
                                 marginLeft: '10px',
                                 marginRight: '10px'
@@ -147,6 +184,8 @@ function Artists() {
 
                         <TextField
                             className="artistInput"
+                            label="Phone"
+                            InputLabelProps={{ shrink: true }}
                             sx={{
                                 marginLeft: '10px',
                                 marginRight: '10px'
@@ -306,7 +345,7 @@ function Artists() {
                                             fontSize: '18px'
                                         }}
                                     >
-                                        <DeleteIcon onClick={() => deleteArtist(artist)}></DeleteIcon>
+                                        <DeleteIcon onClick={() => deleteAlert(artist)}></DeleteIcon>
 
                                     </TableCell>
 

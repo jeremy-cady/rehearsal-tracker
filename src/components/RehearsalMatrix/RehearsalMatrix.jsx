@@ -20,7 +20,6 @@ import {
     MenuItem,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { EmailOutlined } from '@mui/icons-material';
 
 function RehearsalMatrix() {
     const dispatch = useDispatch();
