@@ -53,9 +53,10 @@ function RehearsalMatrix() {
 
 
     const sendEmail = (rehearsal) => {
-
+        console.log(rehearsal.production_name);
         
         let templateParams = {
+            production: rehearsal.production_name,
             email: rehearsal.email,
             date: moment(rehearsal.start_time).format('MM-DD-YYYY'),
             startTime: moment(rehearsal.start_time).format('h:mm a'),
